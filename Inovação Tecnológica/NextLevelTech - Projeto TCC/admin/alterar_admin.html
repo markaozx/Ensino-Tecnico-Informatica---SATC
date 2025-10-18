@@ -1,0 +1,482 @@
+<?php session_start(); if (!isset($_SESSION['adm_id'])) { header('Location: ../loja/login_adm.php'); exit; } if (!isset($_SESSION['nivel']) || $_SESSION['nivel'] !== 'super') { header('Location: ../loja/menu.php'); exit; } ?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Administrador</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-menu {
+            margin-bottom: 2rem;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        h1, h2 {
+            font-family: 'Orbitron', monospace;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #fff;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #e0e0e0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #e0e0e0;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        input, select {
+            padding: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #ff9800;
+            box-shadow: 0 0 20px rgba(255, 152, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        select option {
+            background: #333;
+            color: #fff;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', monospace;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff9800, #f57c00);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #f57c00, #e65100);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #607d8b, #455a64);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #546e7a, #37474f);
+        }
+
+        .btn-info {
+            background: linear-gradient(45deg, #2196f3, #1976d2);
+        }
+
+        .btn-info:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #1976d2, #1565c0);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .options-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .info-note {
+            background: rgba(33, 150, 243, 0.1);
+            border: 1px solid rgba(33, 150, 243, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            color: #2196f3;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .password-info {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .password-strength {
+            margin-top: 0.5rem;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-weak { background: #ff5252; }
+        .strength-medium { background: #ff9800; }
+        .strength-strong { background: #4caf50; }
+
+        .search-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cosmic-bg"></div>
+    <div class="container">
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="../Produto/cadastro_produto.html">Produtos</a></li>
+                <li><a href="../Categoria/cadastro_categoria.html">Categorias</a></li>
+                <li><a href="../Marca/cadastro_marca.html">Marcas</a></li>
+                <li><a href="../Loja/menu.php">Menu</a></li>
+            </ul>
+        </nav>
+        <div class="card">
+            <h1>✏️ Alterar Administrador</h1>
+            
+            <div class="info-note">
+                💡 <strong>Dica:</strong> Primeiro busque o administrador pelo código, depois altere os dados necessários. Deixe a senha em branco para mantê-la inalterada.
+            </div>
+
+            <div class="search-section">
+                <h2>🔍 Buscar Administrador</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="buscar_codigo">Código do Administrador:</label>
+                        <input type="number" id="buscar_codigo" placeholder="Digite o código para buscar..." min="1">
+                        <div class="password-info">Use a opção "Listar Administradores" para ver os códigos disponíveis</div>
+                    </div>
+                    <div class="form-group" style="align-self: end;">
+                        <button type="button" onclick="buscarAdministrador()" class="btn btn-info">🔍 Buscar</button>
+                    </div>
+                </div>
+            </div>
+            
+            <form method="POST" action="cadastro_admin.php" class="form-grid" id="form-alterar">
+                <div class="form-group">
+                    <label for="codigo">Código:</label>
+                    <input type="number" id="codigo" name="codigo" readonly style="background: rgba(255, 255, 255, 0.05);">
+                </div>
+
+                <div class="form-group">
+                    <label for="nome">Nome Completo:</label>
+                    <input type="text" id="nome" name="nome" required placeholder="Ex: João Silva dos Santos..." maxlength="100">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required placeholder="admin@empresa.com" maxlength="100">
+                    <div class="password-info">Este e-mail será usado para login no sistema</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nova_senha">Nova Senha (opcional):</label>
+                    <input type="password" id="nova_senha" name="nova_senha" placeholder="Deixe em branco para manter a senha atual..." minlength="6">
+                    <div class="password-strength">
+                        <div class="password-strength-bar" id="strengthBar"></div>
+                    </div>
+                    <div class="password-info">Deixe em branco para manter a senha atual. Mínimo 6 caracteres se preenchida.</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nivel_acesso">Nível de Acesso:</label>
+                    <select id="nivel_acesso" name="nivel_acesso" required>
+                        <option value="">Selecione o nível...</option>
+                        <option value="1">Administrador Padrão</option>
+                        <option value="2">Super Administrador</option>
+                    </select>
+                    <div class="password-info">
+                        <strong>Padrão:</strong> Pode gerenciar produtos, categorias e marcas<br>
+                        <strong>Super:</strong> Acesso total + gerenciar outros administradores
+                    </div>
+                </div>
+                
+                <div class="form-group full-width">
+                    <button type="submit" name="alterar" class="btn btn-primary" disabled id="btn-alterar">✏️ Alterar Administrador</button>
+                </div>
+            </form>
+
+            <div class="options-section">
+                <h2>🔧 Opções de Gerenciamento</h2>
+                <div class="menu-grid">
+                    <a href="cadastro_admin.html" class="btn btn-secondary">👤 Cadastrar Administrador</a>
+                    <a href="excluir_admin.html" class="btn btn-secondary">🗑️ Excluir Administrador</a>
+                    <a href="listar_admins.php" class="btn btn-secondary">📋 Listar Administradores</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input, select');
+            const novaSenhaInput = document.getElementById('nova_senha');
+            const strengthBar = document.getElementById('strengthBar');
+            
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'scale(1.02)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'scale(1)';
+                });
+            });
+
+            // Validação em tempo real
+            const nomeInput = document.getElementById('nome');
+            const emailInput = document.getElementById('email');
+
+            nomeInput.addEventListener('input', function() {
+                if (this.value.length < 3) {
+                    this.style.borderColor = '#ff5252';
+                } else {
+                    this.style.borderColor = '#4caf50';
+                }
+            });
+
+            emailInput.addEventListener('input', function() {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(this.value)) {
+                    this.style.borderColor = '#ff5252';
+                } else {
+                    this.style.borderColor = '#4caf50';
+                }
+            });
+
+            // Verificador de força da senha
+            novaSenhaInput.addEventListener('input', function() {
+                const password = this.value;
+                
+                if (password === '') {
+                    strengthBar.style.width = '0%';
+                    return;
+                }
+                
+                let strength = 0;
+                
+                if (password.length >= 6) strength += 25;
+                if (password.match(/[a-z]/)) strength += 25;
+                if (password.match(/[A-Z]/)) strength += 25;
+                if (password.match(/[0-9]/)) strength += 12.5;
+                if (password.match(/[^a-zA-Z0-9]/)) strength += 12.5;
+                
+                strengthBar.style.width = strength + '%';
+                
+                if (strength < 50) {
+                    strengthBar.className = 'password-strength-bar strength-weak';
+                } else if (strength < 80) {
+                    strengthBar.className = 'password-strength-bar strength-medium';
+                } else {
+                    strengthBar.className = 'password-strength-bar strength-strong';
+                }
+            });
+
+            // Transformar primeira letra em maiúscula para o nome
+            nomeInput.addEventListener('blur', function() {
+                const words = this.value.split(' ');
+                const capitalizedWords = words.map(word => {
+                    if (word.length > 0) {
+                        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                    }
+                    return word;
+                });
+                this.value = capitalizedWords.join(' ');
+            });
+
+            // Converter email para minúsculo
+            emailInput.addEventListener('blur', function() {
+                this.value = this.value.toLowerCase();
+            });
+        });
+
+        // Simulação da busca de administrador (em um sistema real, seria uma requisição AJAX)
+        function buscarAdministrador() {
+            const codigo = document.getElementById('buscar_codigo').value;
+            
+            if (!codigo || codigo <= 0) {
+                alert('Por favor, digite um código válido.');
+                return;
+            }
+
+            // Simular dados do administrador encontrado
+            // Em um sistema real, isso faria uma requisição AJAX para buscar os dados
+            const adminExemplo = {
+                codigo: codigo,
+                nome: 'Administrador Exemplo',
+                email: 'admin@exemplo.com',
+                nivel_acesso: 1
+            };
+
+            if (confirm(`Administrador encontrado!\n\nCódigo: ${adminExemplo.codigo}\nNome: ${adminExemplo.nome}\nEmail: ${adminExemplo.email}\n\nCarregar dados para edição?`)) {
+                preencherFormulario(adminExemplo);
+            }
+        }
+
+        function preencherFormulario(admin) {
+            document.getElementById('codigo').value = admin.codigo;
+            document.getElementById('nome').value = admin.nome;
+            document.getElementById('email').value = admin.email;
+            document.getElementById('nivel_acesso').value = admin.nivel_acesso;
+            
+            // Habilitar o botão de alterar
+            document.getElementById('btn-alterar').disabled = false;
+            document.getElementById('btn-alterar').style.opacity = '1';
+            
+            // Focar no primeiro campo editável
+            document.getElementById('nome').focus();
+        }
+    </script>
+</body>
+</html>
