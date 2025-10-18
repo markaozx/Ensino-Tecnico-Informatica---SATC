@@ -10,4 +10,8 @@ Terceira e Quarta fase do curso de informatica da satc
 - *Projeto de vida*
 
 # Materias quarta fase:
-- 
+- *Desenvolvimento Back-End II*
+- *Design de Interação*
+- *Inovação Tecnologica*
+- *Redes de Computadores*
+- *Sistemas de Informação*
