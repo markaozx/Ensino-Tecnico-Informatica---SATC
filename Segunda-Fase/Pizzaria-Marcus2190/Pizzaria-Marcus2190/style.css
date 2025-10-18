@@ -1,0 +1,129 @@
+/* Estilo para o contêiner de botões */
+body {
+    background-image: url(Fundocinza.jpg);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+.botoes {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente os botões */
+    padding: 20px; /* Espaçamento superior e inferior */
+}
+
+/* Estilo para cada botão */
+.botao {
+    font-family: 'SWComp'; /* Certifique-se de que esta fonte esteja disponível */
+    font-size: 24px;
+    color: #C0C0C0;
+    text-decoration: none;
+    background-color: #ff3c00;
+    padding: 10px 90px;
+    border-radius: 5px;
+    margin: 0 10px; /* Espaço entre os botões, ajuste conforme necessário */
+}
+
+.botao:hover {
+    color: #FFFFFF;
+    background-color: #1f814b;
+}
+
+/* Outros estilos permanecem inalterados */
+.cabeçario {
+    width: 1850px;
+    height: 785px;
+    background-image: url(fundo.webp);
+}
+
+.laranja {
+    padding-top: 200px;
+    align-items: center;
+    background-image: url(laranja.webp);
+    width: 1850px;
+    height: 960px;
+}
+
+.caixabranca {
+    margin-left: 600px;
+    position: relative;
+    background-color: #FFFFFF;
+    width: 660px;
+    height: 590px;
+}
+#experiencia {
+    font-family: Ravie;
+    text-align:center;
+    font-size:50px;
+    color: #f7a25d;
+}
+#sobre {
+    font-family: Bodoni MT;
+    text-align:center;
+    font-size:25px;
+    color: #ff9137;
+}
+#borapedir {
+    font-family: Bodoni MT Black;
+    text-align:center;
+    font-size:30px;
+    color: #ff8119;
+}
+.links {
+    display: flex;
+    justify-content: center;
+}
+.instagram {
+    height: 50px;
+    width: 50px;
+    margin: 0 50px;
+}
+.facebook {
+    height: 50px;
+    width: 50px;
+    margin: 0 50px;
+}
+.pr {
+    align-items: center;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    height: 230px;
+    width: 400px;
+    margin: 0 100px;
+    font-family: fantasy;
+    font-size: 20;
+    color: #ff3c00;
+}
+.alinhar {
+    padding-top: 40px;
+    display: flex;
+
+}
+.telefone {
+    font-family: Bodoni MT;
+    text-align:center;
+    font-size:25px;
+    color: #ff9137;
+}
+#pedido {
+    background-image: url(laranja.webp);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 800px;
+}
+h2, h3 {
+    color: #000000;
+}
+input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}

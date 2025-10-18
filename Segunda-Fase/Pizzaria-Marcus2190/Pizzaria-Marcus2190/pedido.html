@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino Pizza</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="cabeçario2">
+        <nav class="botoes">
+            <a href="home.html" class="botao">Home</a>
+            <a href="cardapio.html" class="botao">Cardápio</a>
+            <a href="pedido.html" class="botao">Pedir</a>
+        </nav>
+    </header>
+    
+    <main id="pedido">
+        <form name="Pedido" method="post" action="">
+            <h2>INFORMAÇÕES PESSOAIS</h2>
+            <label for="Nome">Nome:</label>
+            <input type="text" name="Nome" id="Nome" required>
+
+            <label for="End">Endereço:</label>
+            <input type="text" name="End" id="End">
+
+            <label for="Cidade">Cidade:</label>
+            <input type="text" name="Cidade" id="Cidade">
+
+            <label for="Bairro">Bairro:</label>
+            <input type="text" name="Bairro" id="Bairro">
+
+            <label for="CEP">CEP:</label>
+            <input type="text" name="CEP" id="CEP" maxlength="8">
+
+            <label for="CPF">CPF:</label>
+            <input type="text" name="CPF" id="CPF" maxlength="11">
+
+            <label for="RG">RG:</label>
+            <input type="text" name="RG" id="RG" maxlength="11">
+
+            <label for="Email">E-mail:</label>
+            <input type="email" name="Email" id="Email">
+
+            <label for="Telefone">Telefone:</label>
+            <input type="tel" name="Telefone" id="Telefone">
+
+            <label for="Celular">Telefone Celular:</label>
+            <input type="tel" name="Celular" id="Celular">
+
+            <label for="Estado">Estado:</label>
+            <select name="Estado" id="Estado">
+                <option value="">Selecione</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="PR">Paraná</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="SP">São Paulo</option>
+                <option value="RJ">Rio de Janeiro</option>
+            </select>
+
+            <h2>INFORMAÇÕES DA ENTREGA</h2>
+            <label for="pag">Forma de Pagamento:</label>
+            <select name="pag" id="pag">
+                <option value="">Selecione</option>
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Débito">Débito</option>
+                <option value="Crédito">Crédito</option>
+                <option value="Pix">Pix</option>
+            </select>
+
+            <label for="Quantidade">Quantidade:</label>
+            <br>
+            <br>
+            <input type="number" name="Quantidade" id="Quantidade">
+            <br>
+            <br>
+            <label for="Data">Data do Pedido:</label>
+            <input type="date" name="Data" id="Data">
+
+            <label for="TipoPizza">Tipo de Pizza:</label>
+            <select name="TipoPizza" id="TipoPizza">
+                <option value="">Selecione</option>
+                <option value="Doce">Doce</option>
+                <option value="Salgada">Salgada</option>
+            </select>
+
+            <label for="TamanhoPizza">Tamanho da Pizza:</label>
+            <select name="TamanhoPizza" id="TamanhoPizza">
+                <option value="">Selecione</option>
+                <option value="Pequena">Pequena</option>
+                <option value="Média">Média</option>
+                <option value="Grande">Grande</option>
+            </select>
+
+            <h3>Sabor:</h3>
+            <div>
+                <input type="checkbox" name="sabor[]" value="CA">Calabresa<br>
+                <input type="checkbox" name="sabor[]" value="QQ">Quatro Queijos<br>
+                <input type="checkbox" name="sabor[]" value="FC">Frango<br>
+                <input type="checkbox" name="sabor[]" value="BA">Basca<br>
+                <input type="checkbox" name="sabor[]" value="PA">Anchovas<br>
+                <input type="checkbox" name="sabor[]" value="MC">California<br>
+                <input type="checkbox" name="sabor[]" value="BD">Brigadeiro<br>
+                <input type="checkbox" name="sabor[]" value="CB">Chocolate Branco<br>
+                <input type="checkbox" name="sabor[]" value="MR">Morango<br>
+            </div>
+            <br>
+            <label for="TipoBorda">Tipo da Borda:</label>
+            <select name="TipoBorda" id="TipoBorda">
+                <option value="">Selecione</option>
+                <option value="Doce">Doce</option>
+                <option value="Salgada">Salgada</option>
+            </select>
+
+            <label for="SaborBorda">Sabor da Borda:</label>
+            <select name="SaborBorda" id="SaborBorda">
+                <option value="">Selecione</option>
+                <option value="Calabresa">Calabresa</option>
+                <option value="Cheddar">Cheddar</option>
+                <option value="Chocolate Preto">Chocolate Preto</option>
+            </select>
+
+            <div class="buttons">
+                <input type="submit" name="Botão" id="Botão" value="ENVIAR">
+                <input type="reset" name="limpar" id="limpar" value="LIMPAR">
+            </div>
+        </form>
+    </main>
+</body>
+</html>
