@@ -1,0 +1,93 @@
+<!DOCTYPE html> 
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitLife - Inscrição</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="inscricao.html">Inscrição</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Faça sua Inscrição</h1>
+    <form id="formInscricao">
+      <fieldset>
+        <legend>Dados Pessoais</legend>
+        <label>Nome: <input type="text" id="nome" required></label><br>
+        
+        <label>Endereço: <input type="text" id="endereco" required></label><br>
+        
+        <label>Bairro: <input type="text" id="bairro" required></label><br>
+        
+        <label>Cidade: <input type="text" id="cidade" required></label><br>
+        
+        <label>Estado:
+          <select id="estado" required>
+            <option value="">Selecione</option>
+            <option value="SP">São Paulo</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PR">Paraná</option>
+            <option value="RS">Rio Grande do Sul</option>
+          </select>
+        </label><br>
+
+        <label>CEP: <input type="text" id="cep" maxlength="8" required></label><br>
+
+        <label>País:
+          <select id="pais" required>
+            <option value="">Selecione</option>
+            <option value="BR">Brasil</option>
+            <option value="USA">Estados Unidos</option>
+            <option value="ARG">Argentina</option>
+            <option value="POR">Portugal</option>
+            <option value="ESP">Espanha</option>
+          </select>
+        </label><br>
+        
+        <label>Telefone Residencial: <input type="tel" id="telefoneResidencial" maxlength="11" required></label><br>
+        
+        <label>Telefone Celular: <input type="tel" id="telefoneCelular" maxlength="11" required></label><br>
+        
+        <label>Sexo:
+          <input type="radio" name="sexo" value="Masculino" required> Masculino
+          <input type="radio" name="sexo" value="Feminino"> Feminino
+          <input type="radio" name="sexo" value="Outro"> Outro
+        </label><br>
+
+        <label>Estado Civil:
+          <input type="radio" name="estadoCivil" value="Solteiro" required> Solteiro
+          <input type="radio" name="estadoCivil" value="Casado"> Casado
+          <input type="radio" name="estadoCivil" value="Divorciado"> Divorciado
+          <input type="radio" name="estadoCivil" value="Viúvo"> Viúvo
+        </label><br>
+        
+        <label>Data de Nascimento: <input type="date" id="nascimento" required></label><br>
+      </fieldset>
+
+      <fieldset>
+        <legend>Modalidades</legend>
+        <label><input type="checkbox" name="modalidade" value="Musculação"> Musculação</label><br>
+        <label><input type="checkbox" name="modalidade" value="Dança"> Dança</label><br>
+        <label><input type="checkbox" name="modalidade" value="Pilates"> Pilates</label>
+      </fieldset>
+
+      <button type="submit">Enviar</button>
+      <button type="reset">Limpar</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Academia FitLife - Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
