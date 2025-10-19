@@ -1,27 +1,30 @@
-/* Estilo para o contêiner de botões */
+/* Estilo base */
 body {
     background-image: url(Fundocinza.jpg);
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     color: #333;
-}
-.botoes {
-    display: flex;
-    justify-content: center; /* Centraliza horizontalmente os botões */
-    padding: 20px; /* Espaçamento superior e inferior */
+    overflow-x: hidden;
 }
 
-/* Estilo para cada botão */
+.botoes {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
 .botao {
-    font-family: 'SWComp'; /* Certifique-se de que esta fonte esteja disponível */
+    font-family: 'SWComp';
     font-size: 24px;
     color: #C0C0C0;
     text-decoration: none;
     background-color: #ff3c00;
     padding: 10px 90px;
     border-radius: 5px;
-    margin: 0 10px; /* Espaço entre os botões, ajuste conforme necessário */
+    margin: 10px;
+    transition: all 0.3s;
 }
 
 .botao:hover {
@@ -29,101 +32,425 @@ body {
     background-color: #1f814b;
 }
 
-/* Outros estilos permanecem inalterados */
-.cabeçario {
-    width: 1850px;
-    height: 785px;
+.cabeçario,
+.cabeçario2 {
+    width: 100%;
+    min-height: 785px;
     background-image: url(fundo.webp);
+    background-size: cover;
+    background-position: center;
 }
 
 .laranja {
     padding-top: 200px;
     align-items: center;
     background-image: url(laranja.webp);
-    width: 1850px;
-    height: 960px;
+    width: 100%;
+    min-height: 960px;
+    background-size: cover;
+    background-position: center;
 }
 
 .caixabranca {
-    margin-left: 600px;
-    position: relative;
+    margin: 0 auto;
     background-color: #FFFFFF;
-    width: 660px;
-    height: 590px;
+    width: 90%;
+    max-width: 660px;
+    padding: 40px 20px;
+    border-radius: 10px;
 }
+
 #experiencia {
     font-family: Ravie;
-    text-align:center;
-    font-size:50px;
+    text-align: center;
+    font-size: 50px;
     color: #f7a25d;
 }
+
 #sobre {
-    font-family: Bodoni MT;
-    text-align:center;
-    font-size:25px;
+    font-family: 'Bodoni MT', serif;
+    text-align: center;
+    font-size: 25px;
     color: #ff9137;
+    line-height: 1.6;
 }
+
+#sobre br {
+    display: none;
+}
+
 #borapedir {
-    font-family: Bodoni MT Black;
-    text-align:center;
-    font-size:30px;
+    font-family: 'Bodoni MT Black', serif;
+    text-align: center;
+    font-size: 30px;
     color: #ff8119;
 }
+
 .links {
     display: flex;
     justify-content: center;
+    margin: 20px 0;
 }
-.instagram {
-    height: 50px;
-    width: 50px;
-    margin: 0 50px;
-}
+
+.instagram,
 .facebook {
     height: 50px;
     width: 50px;
     margin: 0 50px;
 }
+
+.instagram img,
+.facebook img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 .pr {
     align-items: center;
     text-align: center;
     background-color: rgb(255, 255, 255);
     border-radius: 20px;
     height: 230px;
-    width: 400px;
-    margin: 0 100px;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px;
     font-family: fantasy;
-    font-size: 20;
+    font-size: 20px;
     color: #ff3c00;
+    padding: 20px;
+    box-sizing: border-box;
 }
+
+.pr img {
+    max-width: 100%;
+    height: auto;
+}
+
 .alinhar {
     padding-top: 40px;
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
 
-}
 .telefone {
-    font-family: Bodoni MT;
-    text-align:center;
-    font-size:25px;
+    font-family: 'Bodoni MT', serif;
+    text-align: center;
+    font-size: 25px;
     color: #ff9137;
+    margin-top: 20px;
 }
+
+/* Formulário de pedido */
 #pedido {
     background-image: url(laranja.webp);
+    background-size: cover;
+    background-position: center;
     padding: 20px;
     border-radius: 10px;
     margin: 20px auto;
     max-width: 800px;
+    width: 90%;
 }
-h2, h3 {
+
+#pedido h2,
+#pedido h3 {
     color: #000000;
 }
-input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select {
-    width: calc(100% - 20px);
+
+#pedido input[type="text"],
+#pedido input[type="email"],
+#pedido input[type="tel"],
+#pedido input[type="date"],
+#pedido input[type="number"],
+#pedido select {
+    width: 100%;
     padding: 10px;
     margin: 5px 0 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
 }
+
 .buttons {
     display: flex;
     justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.buttons input[type="submit"],
+.buttons input[type="reset"] {
+    flex: 1;
+    min-width: 120px;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.buttons input[type="submit"] {
+    background-color: #ff3c00;
+    color: white;
+}
+
+.buttons input[type="submit"]:hover {
+    background-color: #1f814b;
+}
+
+.buttons input[type="reset"] {
+    background-color: #ccc;
+    color: #333;
+}
+
+.buttons input[type="reset"]:hover {
+    background-color: #999;
+}
+
+/* RESPONSIVIDADE */
+
+/* Tablets grandes */
+@media screen and (max-width: 1024px) {
+    .cabeçario,
+    .cabeçario2 {
+        min-height: 500px;
+    }
+    
+    .laranja {
+        padding-top: 100px;
+        min-height: 700px;
+    }
+    
+    .botao {
+        padding: 10px 60px;
+        font-size: 22px;
+    }
+    
+    .alinhar {
+        gap: 15px;
+    }
+    
+    .pr {
+        max-width: 300px;
+        margin: 15px;
+    }
+}
+
+/* Tablets médios */
+@media screen and (max-width: 768px) {
+    .cabeçario,
+    .cabeçario2 {
+        min-height: 400px;
+    }
+    
+    .botao {
+        padding: 10px 40px;
+        font-size: 20px;
+    }
+    
+    .laranja {
+        padding-top: 80px;
+        min-height: 600px;
+    }
+    
+    .caixabranca {
+        padding: 30px 15px;
+    }
+    
+    #experiencia {
+        font-size: 35px;
+    }
+    
+    #sobre {
+        font-size: 20px;
+    }
+    
+    #borapedir {
+        font-size: 24px;
+    }
+    
+    .instagram,
+    .facebook {
+        margin: 0 30px;
+    }
+    
+    .pr {
+        max-width: 280px;
+        height: auto;
+        min-height: 200px;
+    }
+    
+    .alinhar {
+        padding-top: 20px;
+    }
+    
+    .telefone {
+        font-size: 20px;
+    }
+}
+
+/* Smartphones */
+@media screen and (max-width: 480px) {
+    .cabeçario,
+    .cabeçario2 {
+        min-height: 300px;
+    }
+    
+    .botoes {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+    
+    .botao {
+        width: 90%;
+        max-width: 300px;
+        padding: 12px 20px;
+        font-size: 18px;
+        text-align: center;
+        margin: 8px 0;
+    }
+    
+    .laranja {
+        padding-top: 50px;
+        min-height: auto;
+        padding-bottom: 50px;
+    }
+    
+    .caixabranca {
+        width: 95%;
+        padding: 25px 15px;
+    }
+    
+    #experiencia {
+        font-size: 28px;
+        line-height: 1.2;
+    }
+    
+    #sobre {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    
+    #borapedir {
+        font-size: 20px;
+    }
+    
+    .links {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    .instagram,
+    .facebook {
+        margin: 0 15px;
+        height: 40px;
+        width: 40px;
+    }
+    
+    .pr {
+        max-width: 90%;
+        width: 100%;
+        margin: 10px auto;
+        height: auto;
+        min-height: 180px;
+        padding: 15px;
+    }
+    
+    .pr h2 {
+        font-size: 18px;
+        margin: 10px 0;
+    }
+    
+    .pr img {
+        width: 120px !important;
+        height: 120px !important;
+    }
+    
+    .alinhar {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 15px;
+        gap: 10px;
+    }
+    
+    .telefone {
+        font-size: 18px;
+    }
+    
+    #pedido {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    #pedido h2 {
+        font-size: 20px;
+    }
+    
+    #pedido h3 {
+        font-size: 18px;
+    }
+    
+    #pedido label {
+        font-size: 14px;
+    }
+    
+    #pedido input,
+    #pedido select {
+        font-size: 14px;
+    }
+    
+    .buttons {
+        flex-direction: column;
+    }
+    
+    .buttons input {
+        width: 100%;
+    }
+}
+
+/* Smartphones muito pequenos */
+@media screen and (max-width: 375px) {
+    .cabeçario,
+    .cabeçario2 {
+        min-height: 250px;
+    }
+    
+    #experiencia {
+        font-size: 24px;
+    }
+    
+    #sobre {
+        font-size: 14px;
+    }
+    
+    #borapedir {
+        font-size: 18px;
+    }
+    
+    .botao {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+    
+    .pr {
+        padding: 10px;
+    }
+    
+    .pr h2 {
+        font-size: 16px;
+    }
+    
+    .pr img {
+        width: 100px !important;
+        height: 100px !important;
+    }
+    
+    .telefone {
+        font-size: 16px;
+    }
 }

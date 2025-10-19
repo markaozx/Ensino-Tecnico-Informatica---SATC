@@ -10,20 +10,22 @@ body {
     color: #333;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Garante que o body ocupe toda a altura da tela */
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .container {
-    flex: 1; /* Faz com que o container ocupe o espaço restante */
+    flex: 1;
     max-width: 800px;
+    width: 100%;
     margin: auto;
     padding: 20px;
-    position: relative; /* Permite posicionar elementos dentro */
+    position: relative;
 }
 
 h1 {
     font-size: 2.5em;
-    color: #d9534f; /* Cor personalizada */
+    color: #d9534f;
 }
 
 .nav {
@@ -53,69 +55,75 @@ h1 {
 }
 
 .btn:hover {
-    background-color: #c9302c; /* Cor ao passar o mouse */
+    background-color: #c9302c;
 }
 
 .biografia {
-    width: 650px;
+    width: 100%;
+    max-width: 650px;
     text-align: left;
-    padding: 20px 50px; /* Remova o padding lateral */
-    margin: 430px 200px 40px; /* Margem em cima e em baixo */
+    padding: 20px;
+    margin: 430px auto 40px;
 }
 
 .biografia h1 {
-    color: #d9534f; /* Nome "Hungria" em vermelho */
-    font-size: 20px; /* Tamanho maior */
-    margin-bottom: 10px; /* Espaço abaixo do nome */
+    color: #d9534f;
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
 .biografia h2 {
-    color: #ffffff; /* Cor do título "Biografia" */
+    color: #ffffff;
     font-size: 50px;
-    margin-bottom: 20px; /* Espaço abaixo do título */
+    margin-bottom: 20px;
 }
 
 .biografia p {
-    color: #ffffff; /* Texto em branco */
-    font-size: 20px; /* Aumenta o tamanho do texto */
-    line-height: 1.6; /* Melhor legibilidade */
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 1.6;
 }
 
 #foto_hungria {
     background-image: url(Hungria_home.png);
-    width: 1879px;
-    height: 961px;
+    width: 100%;
+    min-height: 961px;
+    background-size: cover;
+    background-position: center;
 }
+
 #foto_hungria2 {
     background-image: url(hungria2.png);
-    width: 1879px;
-    height: 961px;
+    width: 100%;
+    min-height: 961px;
+    background-size: cover;
+    background-position: center;
 }
 
 .historico h1 {
     font-size: 2em;
-    color: #1bf8ff; /* Título em branco */
+    color: #1bf8ff;
     margin-bottom: 20px;
 }
 
 .historico h2 {
     font-size: 1.5em;
-    color: #1bf8ff; /* Subtítulo em branco */
+    color: #1bf8ff;
     margin: 15px 0;
 }
 
 .historico p {
     font-size: 1em;
-    color: #ffffff; /* Texto em branco */
-    line-height: 1.6; /* Melhor legibilidade */
+    color: #ffffff;
+    line-height: 1.6;
     margin-bottom: 15px;
 }
 
 #logo {
     transition: transform 0.3s;
-    position: absolute; /* Posiciona o elemento absolutamente */
-    top: 20px; /* Posiciona o elemento 20px do topo da página */
-    right: 20px; /* Posiciona o elemento 20px da direita da página */
+    position: absolute;
+    top: 20px;
+    right: 20px;
     background-image: url(logo.png);
     width: 253px;
     height: 169px;
@@ -123,14 +131,15 @@ h1 {
     margin-top: 110px;
     display: flex;
 }
+
 #logo:hover {
-    transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
+    transform: scale(1.1);
 }
 
 #corrente {
-    position: absolute; /* Posiciona o elemento absolutamente */
-    top: 0px; /* Posiciona o elemento 20px do topo da página */
-    right: 0px; /* Posiciona o elemento 20px da direita da página */
+    position: absolute;
+    top: 0px;
+    right: 0px;
     background-image: url(Corrente.webp);
     width: 500px;
     height: 500px;
@@ -144,187 +153,424 @@ h1 {
 }
 
 #foto_hungria3 {
-    background-image: url(Hungria2.png  );
-    width: 100%; /* Para responsividade */
-    height: 1170px; /* Mantém a proporção */
+    background-image: url(Hungria2.png);
+    width: 100%;
+    height: 1170px;
 }
 
 .discografia {
     margin: 50px 20px;
-    color: #ffffff; /* Texto em branco */
+    color: #ffffff;
 }
 
 .discografia h1 {
     font-size: 2em;
-    color: #1bf8ff; /* Cor do título */
+    color: #1bf8ff;
     margin-bottom: 20px;
 }
 
 .discografia h2 {
     margin-top: 250px;
     font-size: 1.5em;
-    color: #1bf8ff; /* Cor do subtítulo */
+    color: #1bf8ff;
     margin: 15px 0;
 }
 
 .album {
-    
     justify-content: center;
     margin: 40px auto;
     width: 850px;
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-    background: #222; /* Fundo escuro para os álbuns */
+    background: #222;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .album img { 
-    width: 430px; /* Tamanho da imagem do álbum */
-    height: auto; /* Mantém a proporção */
-    border-radius: 5px; /* Bordas arredondadas */
-    margin-right: 20px; /* Espaço entre a imagem e o texto */
+    width: 430px;
+    height: auto;
+    border-radius: 5px;
+    margin-right: 20px;
 }
 
 .album-info a {
-    text-decoration: none; /* remove o sublinhado */
-    color: #ffffff; /* cor do texto em branco */
-    font-family: 'Open Sans', sans-serif; /* fonte bonita */
+    text-decoration: none;
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .album-info strong {
-    color: #d9534f; /* cor do título do álbum em vermelho */
-    font-family: 'Open Sans', sans-serif; /* fonte bonita */
-    font-size: 1.5em; /* aumenta o tamanho da fonte em 50% */
+    color: #d9534f;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.5em;
 }
 
 .album-info ul li {
-    color: #ffffff; /* cor das músicas em branco */
-    font-family: 'Open Sans', sans-serif; /* fonte bonita */
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .destaques {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center; /* centraliza verticalmente */
-    margin: 0 auto; /* centraliza horizontalmente */
+    align-items: center;
+    margin: 0 auto;
 }
 
 .destaques a {
-    background-color: #d9534f; /* Cor de fundo dos links */
-    color: #fff; /* Cor do texto */
-    padding: 10px 15px; /* Espaçamento interno */
-    border-radius: 5px; /* Bordas arredondadas */
-    margin-right: 10px; /* Espaçamento entre os links */
-    text-decoration: none; /* Remove o sublinhado */
-    transition: background-color 0.3s; /* Transição suave */
+    background-color: #d9534f;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-right: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s;
 }
 
 .destaques a:hover {
-    background-color: #c9302c; /* Cor ao passar o mouse */
+    background-color: #c9302c;
 }
 
 .fotos {
     justify-content: center;
     margin: 50px 0;
     text-align: center;
-    color: #ffffff; /* Texto em branco */
+    color: #ffffff;
 }
 
 .galeria {
     display: flex;
-    flex-wrap:  wrap;
+    flex-wrap: wrap;
     justify-content: center;
-
 }
 
 .galeria img {
-    width: 280px; /* Tamanho da imagem */
-    height: auto; /* Mantém a proporção */
-    margin: 10px; /* Espaço entre as imagens */
-    border-radius: 10px; /* Bordas arredondadas */
-    transition: transform 0.3s; /* Transição suave ao passar o mouse */
+    width: 280px;
+    height: auto;
+    margin: 10px;
+    border-radius: 10px;
+    transition: transform 0.3s;
 }
 
 .galeria img:hover {
     border-radius: 0;
-    transform: scale(1.5); /* Efeito de zoom ao passar o mouse */
+    transform: scale(1.5);
 }
 
 #foto_fundo {
     background-image: url(Hungria2.png);
-    width: 100%; /* Para responsividade */
-    height: 1170px; /* Mantém a proporção */
+    width: 100%;
+    height: 1170px;
 }
+
 .agenda {
     margin: 50px 0;
     padding-top: 55px;
-    color: #ffffff; /* Texto em branco */
+    color: #ffffff;
 }
 
 .agenda h1 {
     transition: transform 0.3s;
     font-size: 55px;
-    color: #e4403a; /* Cor do título */
+    color: #e4403a;
     margin-bottom: 20px;
 }
+
 .agenda h1:hover {
-    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+    transform: scale(1.05);
 }
+
 .agenda h2 {
     transition: transform 0.3s;
     font-size: 40px;
-    color: #d9534f; /* Cor do subtítulo */
+    color: #d9534f;
     margin: 15px 0;
 }
 
 .agenda h2:hover {
-    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+    transform: scale(1.05);
 }
 
 .agenda ul {
     transition: transform 0.3s;
-    list-style-type: none; /* Remove marcadores da lista */
-    padding: 0; /* Remove padding da lista */
+    list-style-type: none;
+    padding: 0;
 }
 
 .agenda ul:hover {
-    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+    transform: scale(1.05);
 }
 
 .agenda li {
     transition: transform 0.3s;
-    font-size: 25PX;
-    margin-bottom: 10px; /* Espaço entre os itens da lista */
+    font-size: 25px;
+    margin-bottom: 10px;
 }
 
-.agenda li :hover {
-    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+.agenda li:hover {
+    transform: scale(1.05);
 }
 
 .agenda p {
     transition: transform 0.3s;
     font-size: 20px;
-    margin: 5px 0; /* Espaço entre os parágrafos */
+    margin: 5px 0;
 }
 
-.agenda  p:hover {
-    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+.agenda p:hover {
+    transform: scale(1.05);
 }
 
 .agenda a {
-    color: #d9534f; /* Cor dos links */
-    text-decoration: none; /* Remove sublinhado */
+    color: #d9534f;
+    text-decoration: none;
 }
 
 .agenda a:hover {
-    text-decoration: underline; /* Sublinha ao passar o mouse */
+    text-decoration: underline;
 }
 
 .copy {
     color: #fff;
     text-align: center;
+}
+
+/* RESPONSIVIDADE */
+@media screen and (max-width: 1024px) {
+    #logo {
+        width: 200px;
+        height: 133px;
+        margin-right: 50px;
+        margin-top: 50px;
+    }
+    
+    #corrente {
+        width: 350px;
+        height: 350px;
+    }
+    
+    .biografia {
+        margin: 300px auto 40px;
+    }
+    
+    .album {
+        width: 90%;
+        flex-direction: column;
+    }
+    
+    .album img {
+        width: 100%;
+        max-width: 350px;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+    
+    .nav {
+        padding: 15px;
+    }
+    
+    .nav-links li {
+        display: block;
+        margin: 10px 0;
+        text-align: center;
+    }
+    
+    .biografia {
+        margin: 200px auto 40px;
+        padding: 20px;
+    }
+    
+    .biografia h1 {
+        font-size: 18px;
+    }
+    
+    .biografia h2 {
+        font-size: 35px;
+    }
+    
+    .biografia p {
+        font-size: 16px;
+    }
+    
+    #logo {
+        width: 150px;
+        height: 100px;
+        margin-right: 20px;
+        margin-top: 20px;
+    }
+    
+    #corrente {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .historico {
+        margin-left: 20px;
+        margin-top: 100px;
+        width: 90%;
+    }
+    
+    .historico h1 {
+        font-size: 1.5em;
+    }
+    
+    .historico h2 {
+        font-size: 1.2em;
+    }
+    
+    .discografia {
+        margin: 30px 10px;
+    }
+    
+    .discografia h1 {
+        font-size: 1.5em;
+    }
+    
+    .album {
+        width: 95%;
+    }
+    
+    .destaques {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .destaques a {
+        margin: 5px 0;
+        text-align: center;
+    }
+    
+    .galeria img {
+        width: 90%;
+        max-width: 250px;
+    }
+    
+    .agenda h1 {
+        font-size: 40px;
+    }
+    
+    .agenda h2 {
+        font-size: 30px;
+    }
+    
+    .agenda li {
+        font-size: 18px;
+    }
+    
+    .agenda p {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .biografia {
+        margin: 150px auto 40px;
+        padding: 15px;
+    }
+    
+    .biografia h2 {
+        font-size: 28px;
+    }
+    
+    .biografia p {
+        font-size: 14px;
+    }
+    
+    #logo {
+        width: 120px;
+        height: 80px;
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+    
+    #corrente {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .nav-links li {
+        margin: 8px 0;
+    }
+    
+    .btn {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    
+    .historico {
+        margin-left: 10px;
+        margin-top: 80px;
+        width: 95%;
+    }
+    
+    .album img {
+        max-width: 280px;
+    }
+    
+    .galeria img {
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    .galeria img:hover {
+        transform: scale(1.2);
+    }
+    
+    .agenda {
+        padding-top: 30px;
+        margin: 30px 10px;
+    }
+    
+    .agenda h1 {
+        font-size: 30px;
+    }
+    
+    .agenda h2 {
+        font-size: 24px;
+    }
+    
+    .agenda li {
+        font-size: 16px;
+    }
+    
+    .agenda p {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .biografia h2 {
+        font-size: 24px;
+    }
+    
+    .biografia p {
+        font-size: 13px;
+    }
+    
+    .btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+    
+    .agenda h1 {
+        font-size: 26px;
+    }
+    
+    .agenda h2 {
+        font-size: 20px;
+    }
+    
+    .agenda li {
+        font-size: 14px;
+    }
 }
