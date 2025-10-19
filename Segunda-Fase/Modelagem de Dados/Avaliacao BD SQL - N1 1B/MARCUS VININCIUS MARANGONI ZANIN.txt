@@ -1,0 +1,155 @@
+MARCUS VININCIUS MARANGONI ZANIN
+
+QUESTÃO 2:
+
+create database petshop;
+
+create table clientes (
+cpf			int(11)			not null,
+nome		varchar(50) 		not null,
+endereco	varchar(25)		not null,
+bairro		varchar(15)		not null,
+cidade		varchar(15)		not null,
+estado		varchar(15)		not null,
+telefone		int(15)			not null,
+codigo		int(6)			not null,
+primary key (codigo));
+
+create table funcionarios (
+cpf			int(11)			not null,
+nome		varchar(50) 		not null,
+endereco	varchar(25)		not null,
+bairro		varchar(15)		not null,
+cidade		varchar(15)		not null,
+estado		varchar(15)		not null,
+telefone		int(15)			not null,
+cargo		varchar(20)		not null,
+salario		float(6,2)			not null,
+codigo		int(6)			not null,
+primary key (codigo));
+
+create table animal (
+nome		varchar(20)		not null,
+raça 		varchar(20)		not null,
+especie		varchar(20)		not null,
+peso		float(4,2)		        not null,
+altura		int(4)			not null,
+cor			varchar(15)		not null,
+idade		int(3)			not null,
+codigo		int(6)			not null,
+codcliente	int(6)			not null,
+primary key (codigo),
+foreign key (codcliente) references cliente(codigo));
+
+create table atendimentos (
+codigo		int(6)			not null,
+data		date			not null,
+hora		time				not null,
+servico		varchar(20)		not null,
+valor		float(6,2)			not null,
+codfunci	int(6)			not null,
+codanimal	int(6)			not null,
+codcliente	int(6)			not null,
+primary key (codigo),
+foreign key (codfunci) references funcionario(codigo),
+foreign key (codanimal) references animal(codigo),
+foreign key (codcliente) references cliente(codigo));
+
+---------------------------------//---------------------------------
+
+QUESTÃO 3:
+
+insert into clientes (cpf,nome,endereco,bairro,cidade,estado,telefone,codigo) values (1,'Marcus','Rua lirio burigo','centro','sideropolis','SC',1,1);
+insert into clientes (cpf,nome,endereco,bairro,cidade,estado,telefone,codigo) values (2,'Pedro','Rua pinto de veia','centro','sideropolis','SC',2,2);
+insert into clientes (cpf,nome,endereco,bairro,cidade,estado,telefone,codigo) values (3,'Marcus','Rua rincão','centro','sideropolis','SC',3,3);
+
+insert into animais(nome,raça,especie,peso,altura,cor,idade,codigo,codcliente)values('rex','pitbull','cachorro',40.4,25,'marrom',7,1,1);
+insert into animais(nome,raça,especie,peso,altura,cor,idade,codigo,codcliente)values('tico','chihuahua','cachorro',5,7,branco',4,2,2);
+insert into animais(nome,raça,especie,peso,altura,cor,idade,codigo,codcliente)values('rebeca','lulu','cachorro',10.7,10,'caramelo',10,3,3);
+
+insert into funcionarios(cpf,nome,endereco,bairro,cidade,estado,telefone,cargo,salario,codigo) values ('9','claudio','rua oliveira','centro','criciuma','SC',9,'atendente',1200,9);
+insert into funcionarios(cpf,nome,endereco,bairro,cidade,estado,telefone,cargo,salario,codigo) values ('8','isa','rua harmond','centro','criciuma','SC',8,'atendente',1200,8);
+insert into funcionarios(cpf,nome,endereco,bairro,cidade,estado,telefone,cargo,salario,codigo) values ('6','maria','rua tetano','centro','criciuma','SC',6,'tosadora',1420,6);
+
+insert into atendimentos(codigo,data,hora,servico,valor,codfunci,codanimal,codcliente) values (11,20240920,155000,'tosa',120,6,2,1);
+insert into atendimentos(codigo,data,hora,servico,valor,codfunci,codanimal,codcliente) values (13,20240921,125000,'tosa',120,6,1,3);
+insert into atendimentos(codigo,data,hora,servico,valor,codfunci,codanimal,codcliente) values (22,20240924,175000,'tosa',120,6,3,2);
+
+---------------------------------//---------------------------------
+
+QUESTÃO 4:
+
+a) SELECT * FROM clientes ORDER BY nome;
+
+b) SELECT codigo,nome,raça,especie,peso  FROM animais WHERE raça = 'buldogue' AND especie = 'cachorro';
+
+c) SELECT cpf,nome,cargo,salario  FROM funcionarios WHERE cargo = 'tosador' OR cargo = 'banhista';
+
+d) SELECT codigo,data,hora,servico,valor FROM atendimentos WHERE codanimal = 2 AND data >= 20240601 AND data <= 20240931;
+
+e) SELECT * FROM clientes WHERE cidade = 'criciuma' AND bairro = 'centro' ORDER BY nome;
+
+f) select * from animais where idade > 10 and peso > 15;
+
+g) select sum(valor) from atendimentos;
+
+h) select sum(salario)/count(salario) from funcionarios;
+
+i) select max(peso),min(peso) from animais;
+
+j) select codigo,data,hora,codanimal and valor from atendimentos where data >20240801 and data <20240831 and codfunci = 2;
+
+k) select codigo,data,hora,valor from atendimentos where data >20240101 and data<20241231;
+
+l) select codigo,data,hora,codfunci,valor from atendimentos where valor > 300 and codanimal =  3 and codfunci = 2;
+
+m) select codigo,data,hora,valor from atendimentos where data > 20240901 and data < 20240931 and codanimal = 1 and codcliente = 3 and codfunci = 2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

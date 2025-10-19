@@ -1,0 +1,90 @@
+PROVA SQL - MARCUS VINICIUS M. ZANIN
+
+------------------------------//---------------------------------
+
+# QUESTÃO A:
+
+select * from proprietario
+where cidade = "criciuma"
+and estado = "SC" 
+and nome like "A%" 
+order by nome;
+
+#QUESTÃO B:
+
+select animal.codigo,animal.nome,animal.peso,animal.cor,animal.datanascimento 
+from animal,especie 
+where animal.peso > 10 
+and especie.nome = "felino";
+
+#QUESTÃO C:
+
+select animal.* from animal,raca 
+where animal.cor = "branco" 
+and animal.sexo = "M" 
+and raca.nome = "poodle";
+
+#QUESTÃO D:
+
+select animal.codigo,animal.nome,animal.peso,animal.altura,animal.datanascimento 
+from animal,especie 
+where animal.datanascimento > 20200101
+and animal.datanascimento < 20241231
+and animal.sexo = "F"
+and especie.nome = "felino";
+
+#QUESTÃO E:
+
+select * from animal
+where cor = "branco" 
+and sexo = "F"
+and peso > 5; 
+
+#QUESTÂO F:
+
+select animal.codigo,animal.nome,animal.peso,animal.cor,animal.altura,raca.nome,proprietario.nome
+from animal,proprietario,raca
+where raca.nome = "labrador"
+and animal.peso > 10
+and animal.sexo = "M"
+and proprietario.nome like "André%";
+
+#QUESTÂO G:
+
+select animal.codigo,animal.nome,animal.peso,animal.cor,animal.sexo,raca.nome,proprietario.nome,especie.nome
+from animal,proprietario,raca,especie
+where animal.datanascimento > 20190101
+and animal.sexo = "F"
+and especie.nome = "felino"
+and proprietario.nome like "ana%";
+
+#QUESTÂO H:
+
+select a.nome, b.nome
+from animal a
+right join especie b
+on a.codespecie = b.codigo;
+
+#QUESTÃO I:
+
+select a.nome, b.nome
+from animal a
+right join raca b
+on a.codespecie = b.codigo
+where a.codespecie is null;
+
+#QUESTÃO J:
+
+select a.nome, b.nome
+from animal a
+right join proprietario b
+on a.codproprietario = b.codigo
+where a.codproprietario is not null;
+
+#QUESTÃO K:
+
+select a.nome, b.nome
+from animal a
+right join proprietario b
+on a.codproprietario = b.codigo
+where a.codproprietario is null;

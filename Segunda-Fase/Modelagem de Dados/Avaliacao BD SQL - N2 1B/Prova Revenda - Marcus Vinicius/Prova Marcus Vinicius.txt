@@ -1,0 +1,111 @@
+	QUESTÃO 1:
+
+create database revenda;
+
+	QUESTÃO 2:
+
+create table cliente (
+cpf				int(11)				not null,
+nome 			varchar(45)			not null,
+endereco		varchar(45)			not null,
+cidade			varchar(45)			not null,
+estado			varchar(45)			not null,
+telefone			int(15)	    			not null,
+primary key (cpf));
+
+create table marca (
+codigo			int(5)	   			not null,
+nome			varchar(45)			not null,
+primary key (codigo));
+
+create table categoria(
+codigo			int(5)	   			not null,
+descricão		varchar(45)			not null,
+primary key (codigo));
+
+create table modelo(
+codigo			int(5)	   			not null,
+nome			varchar(45)			not null,
+codmarca		int(5)	   			not null,
+primary key (codigo),
+foreign key (codmarca) references marca(codigo));
+
+create table veiculo(
+codigo			int(5)	   			not null,
+placa			varchar(8)			not null,
+descricao		varchar(45)			not null,
+ano				int(4)	    			not null,
+cor				varchar(15)			not null,
+combustivel		varchar(20)			not null,
+acessorios		varchar(100)			not null,
+codmarca		int(5)	  			not null,
+codcategoria	int(5)	   			not null,
+cpfcliente		int(11)	   			not null,
+codmodelo		int(5)	   			not null,
+primary key (codigo),
+foreign key (codmarca) references marca(codigo),
+foreign key (codcategoria) references categoria(codigo),
+foreign key (cpfcliente) references cliente(cpf),
+foreign key (codmodelo) references modelo(codigo));
+
+	QUESTÃO 3:
+
+alter table cliente add email varchar(45) not null;
+
+	QUESTÃO 4:
+
+alter table veiculo add valor float(10,2) not null;
+
+	QUESTÃO 5:
+
+insert into cliente(cpf,nome,endereco,cidade,estado,telefone,email) values (11,'Marcus Vinicius','Lirio Burigo','Sideropolis','SC',0,'1@gmail.com');
+insert into cliente(cpf,nome,endereco,cidade,estado,telefone,email) values (22,'Pedro Henrique','Sto Antonio','Criciuma','SC',1,'2@gmail.com');
+insert into cliente(cpf,nome,endereco,cidade,estado,telefone,email) values (33,'Matheus Donadel','Terezinha','Sideropolis','SC',2,'3@gmail.com');
+insert into cliente(cpf,nome,endereco,cidade,estado,telefone,email) values (44,'Isadora Rodrigues','7 de setembro','Ararangua','SC',3,'4@gmail.com');
+insert into cliente(cpf,nome,endereco,cidade,estado,telefone,email) values (55,'Joao Vitor','Natal','Joinville','SC',4,'5@gmail.com');
+
+insert into marca(codigo,nome) values (1,'koenigsegg');
+insert into marca(codigo,nome) values (2,'bugatti');
+insert into marca(codigo,nome) values (3,'mclaren');
+insert into marca(codigo,nome) values (4,'henessey');
+insert into marca(codigo,nome) values (5,'pagani');
+
+insert into categoria(codigo,descricão) values (1,'utilitario');
+insert into categoria(codigo,descricão) values (2,'pickup');
+insert into categoria(codigo,descricão) values (3,'hipercarro');
+insert into categoria(codigo,descricão) values (4,'esportivo');
+insert into categoria(codigo,descricão) values (5,'SUV');
+
+insert into modelo(codigo,nome,codmarca) values (1,'Jesko',1);
+insert into modelo(codigo,nome,codmarca) values (2,'Chiron Super Sport 300+',2);
+insert into modelo(codigo,nome,codmarca) values (3,'W1',3);
+insert into modelo(codigo,nome,codmarca) values (4,'Venom F5',4);
+insert into modelo(codigo,nome,codmarca) values (5,'Zonda HP Barchetta',5);
+
+insert into veiculo(codigo,placa,descricao,ano,cor,combustivel,acessorios,codmarca,codcategoria,cpfcliente,codmodelo,valor) values (11,'BYE 0008','Velocidade maxima: 473km/h, Cavalaria: 1300HP',2023,'dourado','gasolina','Não possui',1,3,11,1,35000000.00);
+insert into veiculo(codigo,placa,descricao,ano,cor,combustivel,acessorios,codmarca,codcategoria,cpfcliente,codmodelo,valor) values (22,'CSS 0300','Velocidade maxima: 490km/h, Cavalaria: 1450HP',2023,'Fibra de carbon','gasolina','Não possui',2,3,11,2,41000000.00);
+insert into veiculo(codigo,placa,descricao,ano,cor,combustivel,acessorios,codmarca,codcategoria,cpfcliente,codmodelo,valor) values (33,'WWW 1100','Velocidade maxima: Indef, Cavalaria: 1201HP',2024,'Laranja','gasolina','Não possui',3,3,11,3,21000000.00);
+insert into veiculo(codigo,placa,descricao,ano,cor,combustivel,acessorios,codmarca,codcategoria,cpfcliente,codmodelo,valor) values (44,'FFF 5555','Velocidade maxima: 500km/h, Cavalaria: 1750HP',2020,'Amarelo','gasolina','Não possui',4,3,11,4,28000000.00);
+insert into veiculo(codigo,placa,descricao,ano,cor,combustivel,acessorios,codmarca,codcategoria,cpfcliente,codmodelo,valor) values (55,'ZND 0350','Velocidade maxima: 350km/h, Cavalaria: 790HP',2020,'Fibra de carbon','gasolina','Não possui',5,3,11,5,111000000.00);
+
+		QUESTÃO 6:
+
+a) select * from categoria;
+b) select nome,cidade,telefone from cliente;
+c) select * from marca sorted by nome;
+d) select * from modelo where codmarca = 2;
+e) select placa,cor,ano e valor from veiculos;
+f ) select * from clientes where cidade = Criciuma;
+g) select * from veiculos where ano = 2020 and cor = 'prata';
+h) select * from veiculos where ano >= 2020 and ano <= 2024 and cor = 'branca and
+combustivel = 'gasolina';
+i) select placa,cor,ano,valor from veiculos where valor >= 15000 and valor <=20000 and ano >= 2010 and ano <= 2020
+j) select placa,cor,ano,valor from veiculo,cliente where cliente.nome = 'Maria';
+k) select placa,cor,ano,valor from veiculo,cliente,marca where cliente.nome = 'Carlos' and marca.nome = 'Ford';
+l) select descricao,placa,cor,ano,valor, from veiculo,marca,modelo where marca.nome = 'Fiat' and modelo.nome = 'Palio';
+m) select veiculo.descricao,veiculo.ano,veiculo.valor,cliente.nome,cliente.telefone from veiculo,cliente,marca where marca.nome = 'Ford';
+n) select veiculo.descricao,veiculo.ano,veiculo.valor,veiculo.placa,veiculo.cor,cliente.nome,cliente.cidade from veiculo,cliente,marca,modelo where marca.nome = 'fiat' and modelo.nome = 'uno'
+o) select veiculo.descricao,veiculo.ano,veiculo.valor,cliente.nome,cliente.telefone,marca.nome from veiculo,cliente,marca,modelo,categoria where categoria.descricão = 'moto' and veiculo.ano between 2010 and 2020;
+p) select veiculo.descricao,veiculo.ano,veiculo.valor,cliente.nome,marca.nome from cliente,veiculo,marca where modelo.nome = 'fiat' and veiculo.ano between 2020 and 2024 and veiculo.cor = 'preto';
+q) select veiculo.descricao,veiculo.ano,veiculo.valor,cliente.nome,modelo.nome from veiculo,cliente,modelo,marca where marca.nome = 'fiat' and veiculo.nome between 2020 and 2024 and veiculo.cor = 'preto';
+r) select veiculo.descricao,veiculo.ano,veiculo.valor,veiculo.cor,cliente.nome,modelo.nome,marca.nome from veiculo,marca,modelo,cliente where veiculo.ano = 2020 and veiculo.ano = 2022 and veiculo.ano = 2024 and veiculo.combustivel = 'gasolina';

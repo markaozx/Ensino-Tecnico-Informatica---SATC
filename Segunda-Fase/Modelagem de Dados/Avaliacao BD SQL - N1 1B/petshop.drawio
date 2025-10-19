@@ -1,0 +1,55 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 OPR/113.0.0.0" version="24.7.16">
+  <diagram name="Página-1" id="aYUUTL31gnSP5otAFKu4">
+    <mxGraphModel dx="1291" dy="522" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="k9i94vyj1w9aOl1ycUiO-11" value="Clientes" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=1;shadow=1;labelBackgroundColor=none;fillColor=#5D7F99;strokeColor=#D0CEE2;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="10" y="50" width="140" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="k9i94vyj1w9aOl1ycUiO-12" value="CPF&lt;br&gt;NOME&lt;div&gt;ENDEREÇO&lt;/div&gt;&lt;div&gt;BAIRRO&lt;/div&gt;&lt;div&gt;CIDADE&lt;/div&gt;&lt;div&gt;ESTADO&lt;/div&gt;&lt;div&gt;TELEFONE&lt;/div&gt;&lt;div&gt;CODIGO&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;PK&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontColor=#1A1A1A;" vertex="1" parent="k9i94vyj1w9aOl1ycUiO-11">
+          <mxGeometry y="30" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="k9i94vyj1w9aOl1ycUiO-15" value="Animais" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=1;shadow=1;labelBackgroundColor=none;fillColor=#5D7F99;strokeColor=#D0CEE2;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="230" y="50" width="150" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="k9i94vyj1w9aOl1ycUiO-16" value="&lt;div&gt;CODIGO&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;             PK&lt;/span&gt;&lt;/div&gt;&lt;div&gt;NOME&lt;/div&gt;&lt;div&gt;RAÇA&lt;/div&gt;&lt;div&gt;ESPÉCIE&lt;/div&gt;&lt;div&gt;PESO&lt;/div&gt;&lt;div&gt;ALTURA&lt;/div&gt;&lt;div&gt;COR&lt;/div&gt;&lt;div&gt;IDADE&lt;/div&gt;&lt;div&gt;CODCLIENTE&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;FK&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontColor=#1A1A1A;" vertex="1" parent="k9i94vyj1w9aOl1ycUiO-15">
+          <mxGeometry y="30" width="150" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="k9i94vyj1w9aOl1ycUiO-17" value="Funcionarios" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=1;shadow=1;labelBackgroundColor=none;fillColor=#5D7F99;strokeColor=#D0CEE2;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="450" y="290" width="140" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="k9i94vyj1w9aOl1ycUiO-18" value="CPF&lt;br&gt;NOME&lt;div&gt;ENDEREÇO&lt;/div&gt;&lt;div&gt;BAIRRO&lt;/div&gt;&lt;div&gt;CIDADE&lt;/div&gt;&lt;div&gt;ESTADO&lt;/div&gt;&lt;div&gt;TELEFONE&lt;/div&gt;&lt;div&gt;CARGO&lt;/div&gt;&lt;div&gt;SALARIO&lt;/div&gt;&lt;div&gt;CODIGO PK&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontColor=#1A1A1A;" vertex="1" parent="k9i94vyj1w9aOl1ycUiO-17">
+          <mxGeometry y="30" width="140" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="k9i94vyj1w9aOl1ycUiO-19" value="Atendimentos" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;rounded=1;shadow=1;labelBackgroundColor=none;fillColor=#5D7F99;strokeColor=#D0CEE2;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="230" y="290" width="140" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="k9i94vyj1w9aOl1ycUiO-20" value="CODIGO&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; PK&lt;div&gt;DATA&lt;/div&gt;&lt;div&gt;HORA&lt;/div&gt;&lt;div&gt;CODFUNCIONARIO FK&lt;/div&gt;&lt;div&gt;CODCLIENTE&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp; FK&lt;/div&gt;&lt;div&gt;CODANIMAL&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&amp;nbsp; FK&lt;/div&gt;&lt;div&gt;SERVIÇO&lt;/div&gt;&lt;div&gt;VALOR&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontColor=#1A1A1A;" vertex="1" parent="k9i94vyj1w9aOl1ycUiO-19">
+          <mxGeometry y="30" width="140" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="k9i94vyj1w9aOl1ycUiO-24" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERoneToMany;rounded=0;exitX=1.013;exitY=1.005;exitDx=0;exitDy=0;exitPerimeter=0;shadow=1;labelBackgroundColor=none;strokeColor=#736CA8;fontColor=default;" edge="1" parent="1" source="k9i94vyj1w9aOl1ycUiO-16">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="370" y="200" as="sourcePoint" />
+            <mxPoint x="230" y="290" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="120" y="200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k9i94vyj1w9aOl1ycUiO-25" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;rounded=0;exitX=1.013;exitY=1.001;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=0;shadow=1;labelBackgroundColor=none;strokeColor=#736CA8;fontColor=default;" edge="1" parent="1" source="k9i94vyj1w9aOl1ycUiO-12" target="k9i94vyj1w9aOl1ycUiO-15">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="130" y="175" as="sourcePoint" />
+            <mxPoint x="230" y="75" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k9i94vyj1w9aOl1ycUiO-27" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERoneToMany;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=0;exitX=1.013;exitY=1.001;exitDx=0;exitDy=0;exitPerimeter=0;shadow=1;labelBackgroundColor=none;strokeColor=#736CA8;fontColor=default;" edge="1" parent="1" source="k9i94vyj1w9aOl1ycUiO-20" target="k9i94vyj1w9aOl1ycUiO-17">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="360" y="425" as="sourcePoint" />
+            <mxPoint x="460" y="325" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

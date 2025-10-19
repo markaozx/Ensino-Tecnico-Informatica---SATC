@@ -1,0 +1,70 @@
+<mxfile host="app.diagrams.net" modified="2024-06-05T17:34:36.128Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="Q88X5XB2HRTj4OkGINyo" version="24.4.14" type="device">
+  <diagram name="Página-1" id="9CHxv8kNqrZQyqpQeDXE">
+    <mxGraphModel dx="880" dy="468" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bj-KtxKtsUCAArT4e_sw-18" value="Paciente" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="170" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="bj-KtxKtsUCAArT4e_sw-19" value="codigo&amp;nbsp; PK&lt;div&gt;nome&lt;/div&gt;&lt;div&gt;endereço&lt;/div&gt;&lt;div&gt;cidade&lt;/div&gt;&lt;div&gt;estado&lt;/div&gt;&lt;div&gt;telefone&lt;/div&gt;&lt;div&gt;cpf&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="bj-KtxKtsUCAArT4e_sw-18">
+          <mxGeometry y="50" width="160" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bj-KtxKtsUCAArT4e_sw-20" value="Dentista" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="460" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="bj-KtxKtsUCAArT4e_sw-21" value="codigo&amp;nbsp; PK&lt;div&gt;nome&lt;/div&gt;&lt;div&gt;cidade&lt;/div&gt;&lt;div&gt;estado&lt;/div&gt;&lt;div&gt;telefone&lt;/div&gt;&lt;div&gt;especialidade&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="bj-KtxKtsUCAArT4e_sw-20">
+          <mxGeometry y="50" width="160" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bj-KtxKtsUCAArT4e_sw-22" value="Atendente" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="170" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="bj-KtxKtsUCAArT4e_sw-23" value="codigo&amp;nbsp; PK&lt;div&gt;nome&lt;/div&gt;&lt;div&gt;endereço&lt;/div&gt;&lt;div&gt;cidade&lt;/div&gt;&lt;div&gt;estado&lt;/div&gt;&lt;div&gt;cargo&lt;/div&gt;&lt;div&gt;salario&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="bj-KtxKtsUCAArT4e_sw-22">
+          <mxGeometry y="50" width="160" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="bj-KtxKtsUCAArT4e_sw-24" value="Consultas" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="220" width="160" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="bj-KtxKtsUCAArT4e_sw-25" value="codigo&amp;nbsp; &amp;nbsp;PK&lt;div&gt;data&lt;/div&gt;&lt;div&gt;hora&lt;/div&gt;&lt;div&gt;descrição&lt;/div&gt;&lt;div&gt;procedimentos&lt;/div&gt;&lt;div&gt;codpaciente&amp;nbsp; &amp;nbsp; FK&lt;/div&gt;&lt;div&gt;codatendente&amp;nbsp; &amp;nbsp; &amp;nbsp;FK&lt;/div&gt;&lt;div&gt;coddentista&amp;nbsp; &amp;nbsp; FK&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="bj-KtxKtsUCAArT4e_sw-24">
+          <mxGeometry y="50" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="bj-KtxKtsUCAArT4e_sw-26" value="Tratamento" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="445" width="160" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="bj-KtxKtsUCAArT4e_sw-27" value="codigo&amp;nbsp; &amp;nbsp;PK&lt;div&gt;data&lt;/div&gt;&lt;div&gt;hora&lt;/div&gt;&lt;div&gt;descrição&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;medicamentos&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;exames&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;valor&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;codpaciente&amp;nbsp; &amp;nbsp; FK&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;coddentista&amp;nbsp; &amp;nbsp; &amp;nbsp;FK&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="bj-KtxKtsUCAArT4e_sw-26">
+          <mxGeometry y="50" width="160" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="bj-KtxKtsUCAArT4e_sw-28" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmany;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="bj-KtxKtsUCAArT4e_sw-19" target="bj-KtxKtsUCAArT4e_sw-24">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="159" y="182" as="sourcePoint" />
+            <mxPoint x="310" y="338" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bj-KtxKtsUCAArT4e_sw-29" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmany;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="bj-KtxKtsUCAArT4e_sw-23" target="bj-KtxKtsUCAArT4e_sw-25">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="430" y="240" as="sourcePoint" />
+            <mxPoint x="510" y="292" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bj-KtxKtsUCAArT4e_sw-30" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmany;rounded=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="bj-KtxKtsUCAArT4e_sw-21" target="bj-KtxKtsUCAArT4e_sw-27">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="310" y="550" as="sourcePoint" />
+            <mxPoint x="390" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bj-KtxKtsUCAArT4e_sw-31" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmany;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="70" y="330" as="sourcePoint" />
+            <mxPoint x="150" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bj-KtxKtsUCAArT4e_sw-32" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmany;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="bj-KtxKtsUCAArT4e_sw-25">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="360" y="410" as="sourcePoint" />
+            <mxPoint x="440" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
