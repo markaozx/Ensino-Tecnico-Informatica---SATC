@@ -324,7 +324,8 @@ foreach ($_SESSION['cart'] as $item) {
                     <div style="margin-top: 2rem;">
                         <a href="?action=clear" class="btn btn-danger" onclick="return confirm('Esvaziar carrinho?')">Esvaziar Carrinho</a>
                         <?php if (isset($_SESSION['cliente_id'])): ?>
-                            <a href="#" class="btn btn-success" onclick="alert('Funcionalidade de checkout em desenvolvimento!')">Finalizar Compra</a>
+                            <a href="pagamento_pix.php" class="btn-pix">💰 Pagar com PIX</a>
+
                         <?php else: ?>
                             <a href="login_cliente.php?redirect=carrinho.php" class="btn btn-success">Fazer Login para Finalizar</a>
                         <?php endif; ?>

@@ -205,157 +205,123 @@ function buildUrl($params) {
             line-height: 1.6;
         }
 
-        /* Header */
-        .top-bar {
-            background: var(--primary-color);
-            color: var(--secondary-color);
-            padding: 8px 0;
-            font-size: 12px;
-            text-align: center;
-        }
+        /* ===== HEADER TRANSPARENTE COM TRANSIÇÃO ===== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background: transparent;
+  transition: all 0.3s ease;
+}
 
-        .top-bar a {
-            color: var(--accent-color);
-            text-decoration: none;
-            margin: 0 10px;
-        }
+.header.scrolled,
+.header:hover {
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
 
-        .header {
-            background: var(--secondary-color);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
+/* conteúdo interno */
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
 
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+/* logo */
+.logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.logo span { color: #ff3333; }
+.header.scrolled .logo,
+.header:hover .logo {
+  color: #111;
+}
 
-        .logo {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            color: var(--primary-color);
-            text-decoration: none;
-        }
+/* menu */
+.nav-menu {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+.nav-menu a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.header.scrolled .nav-menu a,
+.header:hover .nav-menu a {
+  color: #111;
+}
 
-        .logo span {
-            color: var(--accent-color);
-        }
+/* ações (ícones e busca) */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.icon-btn {
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.header.scrolled .icon-btn,
+.header:hover .icon-btn {
+  color: #111;
+}
 
-        .nav-menu {
-            display: flex;
-            gap: 35px;
-            list-style: none;
-        }
+.search-box input {
+  border: none;
+  border-radius: 20px;
+  padding: 6px 10px;
+  outline: none;
+}
+.search-box button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
-        .nav-menu a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: color 0.3s;
-            position: relative;
-        }
+/* carrinho */
+.cart-count {
+  background: #ff3333;
+  color: #fff;
+  border-radius: 50%;
+  padding: 1px 6px;
+  font-size: 12px;
+  position: relative;
+  top: -8px;
+  right: 5px;
+}
 
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            transition: width 0.3s;
-        }
+/* mobile */
+.mobile-menu-btn {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.header.scrolled .mobile-menu-btn,
+.header:hover .mobile-menu-btn {
+  color: #111;
+}
 
-        .nav-menu a:hover {
-            color: var(--accent-color);
-        }
-
-        .nav-menu a:hover::after {
-            width: 100%;
-        }
-
-        .nav-menu a.active {
-            color: var(--accent-color);
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .search-box {
-            position: relative;
-        }
-
-        .search-box input {
-            padding: 10px 40px 10px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            width: 300px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        .search-box button {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        .icon-btn {
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            position: relative;
-            color: var(--text-primary);
-            transition: transform 0.2s;
-            text-decoration: none;
-        }
-
-        .icon-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--accent-color);
-            color: white;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 11px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-        }
-
+@media (max-width: 768px) {
+  .nav-menu { display: none; }
+  .mobile-menu-btn { display: block; }
+}
         /* Hero Banner */
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -842,6 +808,7 @@ function buildUrl($params) {
             }
         }
 
+        
         @media (max-width: 768px) {
             .header-content {
                 padding: 15px 20px;
@@ -894,14 +861,297 @@ function buildUrl($params) {
                 padding: 30px 20px;
             }
         }
+        /* ===== CARROSSEL - BANNER PRINCIPAL ===== */
+/* ===== CARROSSEL - BANNER PRINCIPAL ===== */
+/* ===== CARROSSEL - BANNER PRINCIPAL ===== */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #000;
+    height: 934px; /* Altura padrão 1920x934, será ajustada pelo JS */
+}
+
+.carousel-slide {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+    height: 100%;
+}
+
+.carousel-slide img {
+    width: 100%;
+    min-width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+.carousel-prev,
+.carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 20px 24px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    line-height: 1;
+}
+
+.carousel-prev {
+    left: 30px;
+}
+
+.carousel-next {
+    right: 30px;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+    background: rgba(255, 107, 0, 0.9);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-prev:active,
+.carousel-next:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    backdrop-filter: blur(5px);
+}
+
+.dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: scale(1.2);
+}
+
+.dot.active {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    width: 30px;
+    border-radius: 8px;
+}
+
+/* Responsivo - Desktop extra grande (1920px+) */
+@media (min-width: 1920px) {
+    .carousel-container {
+        height: 934px;
+    }
+}
+
+/* Responsivo - Desktop grande (1440px - 1919px) */
+@media (max-width: 1919px) and (min-width: 1440px) {
+    .carousel-container {
+        height: 700px; /* 1440 / 2.056 ≈ 700px */
+    }
+}
+
+/* Responsivo - Desktop médio (1280px - 1439px) */
+@media (max-width: 1439px) and (min-width: 1280px) {
+    .carousel-container {
+        height: 622px; /* 1280 / 2.056 ≈ 622px */
+    }
+    
+    .carousel-prev,
+    .carousel-next {
+        padding: 18px 22px;
+        font-size: 26px;
+    }
+}
+
+/* Responsivo - Desktop pequeno / Laptop (1024px - 1279px) */
+@media (max-width: 1279px) and (min-width: 1024px) {
+    .carousel-container {
+        height: 465px; /* 1024 / 2.2 ≈ 465px */
+    }
+    
+    .carousel-prev,
+    .carousel-next {
+        padding: 16px 20px;
+        font-size: 24px;
+        left: 20px;
+    }
+    
+    .carousel-next {
+        right: 20px;
+    }
+    
+    .carousel-dots {
+        bottom: 30px;
+        gap: 10px;
+    }
+    
+    .dot {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .dot.active {
+        width: 26px;
+    }
+}
+
+/* Responsivo - Tablets (768px - 1023px) */
+@media (max-width: 1023px) and (min-width: 768px) {
+    .carousel-container {
+        height: 410px; /* 1024 / 2.5 ≈ 410px */
+    }
+    
+    .carousel-prev,
+    .carousel-next {
+        padding: 14px 18px;
+        font-size: 22px;
+    }
+    
+    .carousel-prev {
+        left: 15px;
+    }
+    
+    .carousel-next {
+        right: 15px;
+    }
+    
+    .carousel-dots {
+        bottom: 25px;
+        gap: 10px;
+    }
+    
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .dot.active {
+        width: 24px;
+    }
+}
+
+/* Responsivo - Mobile grande (480px - 767px) */
+@media (max-width: 767px) and (min-width: 480px) {
+    .carousel-container {
+        height: 360px; /* ~640 / 1.8 */
+    }
+    
+    .carousel-prev,
+    .carousel-next {
+        padding: 10px 14px;
+        font-size: 18px;
+        background: rgba(0, 0, 0, 0.6);
+    }
+    
+    .carousel-prev {
+        left: 10px;
+    }
+    
+    .carousel-next {
+        right: 10px;
+    }
+    
+    .carousel-dots {
+        bottom: 20px;
+        gap: 8px;
+        padding: 8px 16px;
+    }
+    
+    .dot {
+        width: 8px;
+        height: 8px;
+        border-width: 1px;
+    }
+    
+    .dot.active {
+        width: 20px;
+    }
+}
+
+/* Responsivo - Mobile pequeno (até 479px) */
+@media (max-width: 479px) {
+    .carousel-container {
+        height: 280px; /* ~375 / 1.8 */
+    }
+    
+    .carousel-prev,
+    .carousel-next {
+        padding: 8px 12px;
+        font-size: 16px;
+        background: rgba(0, 0, 0, 0.7);
+    }
+    
+    .carousel-prev {
+        left: 8px;
+    }
+    
+    .carousel-next {
+        right: 8px;
+    }
+    
+    .carousel-dots {
+        bottom: 15px;
+        gap: 6px;
+        padding: 6px 12px;
+    }
+    
+    .dot {
+        width: 6px;
+        height: 6px;
+        border-width: 1px;
+    }
+    
+    .dot.active {
+        width: 18px;
+    }
+}
+
+        
     </style>
 </head>
-<body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-        Frete grátis para compras acima de R$ 299 | <a href="#">Aproveite!</a>
-    </div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector(".header");
 
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+  });
+});
+</script>
+
+<body>
     <!-- Header -->
     <header class="header">
         <div class="header-content">
@@ -952,15 +1202,28 @@ function buildUrl($params) {
     </header>
 
     <!-- Hero Banner -->
-    <?php if ($pesquisa == '' && $categoria_id == 0): ?>
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Evolua Seu Setup</h1>
-            <p>Periféricos gamer de alta performance para elevar seu jogo ao próximo nível</p>
-            <a href="#produtos" class="cta-btn">Explorar Produtos</a>
-        </div>
-    </section>
-    <?php endif; ?>
+    <div class="carousel-container">
+    <div class="carousel-slide">
+        <img src="Assets/Banner1.jpg" alt="Banner 1 - NextLevel Tech">
+        <img src="Assets/Banner2.jpg" alt="Banner 2 - NextLevel Tech">
+        <img src="Assets/Banner3.jpg" alt="Banner 3 - NextLevel Tech">
+        <img src="Assets/Banner4.jpg" alt="Banner 4 - NextLevel Tech">
+        <img src="Assets/Banner5.jpg" alt="Banner 5 - NextLevel Tech">
+    </div>
+
+    <button class="carousel-prev" onclick="plusSlides(-1)">&#10094;</button>
+    <button class="carousel-next" onclick="plusSlides(1)">&#10095;</button>
+
+    <div class="carousel-dots">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+    </div>
+</div>
+
+<script src="assets/js/carousel.js"></script>
 
     <!-- Categories -->
     <?php if (!empty($categorias)): ?>
@@ -1260,50 +1523,50 @@ function buildUrl($params) {
         // Mobile menu toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navMenu = document.querySelector('.nav-menu');
-        
+
         if (mobileMenuBtn && navMenu) {
-            mobileMenuBtn.addEventListener('click', function() {
-                if (navMenu.style.display === 'flex') {
-                    navMenu.style.display = 'none';
+            mobileMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navMenu.classList.toggle('active');
+                
+                // Muda o ícone do botão
+                if (navMenu.classList.contains('active')) {
+                    this.textContent = '✕';
                 } else {
-                    navMenu.style.display = 'flex';
-                    navMenu.style.flexDirection = 'column';
-                    navMenu.style.position = 'absolute';
-                    navMenu.style.top = '100%';
-                    navMenu.style.left = '0';
-                    navMenu.style.right = '0';
-                    navMenu.style.background = 'white';
-                    navMenu.style.padding = '20px';
-                    navMenu.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
-                    navMenu.style.zIndex = '999';
+                    this.textContent = '☰';
                 }
             });
 
             // Fechar menu ao clicar fora
             document.addEventListener('click', function(e) {
-                if (!mobileMenuBtn.contains(e.target) && !navMenu.contains(e.target)) {
-                    if (window.innerWidth <= 768) {
-                        navMenu.style.display = 'none';
+                if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    navMenu.classList.remove('active');
+                    if (mobileMenuBtn) {
+                        mobileMenuBtn.textContent = '☰';
                     }
                 }
+            });
+            
+            // Fechar menu ao clicar em um link
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    if (mobileMenuBtn) {
+                        mobileMenuBtn.textContent = '☰';
+                    }
+                });
             });
         }
 
         // Ajustar menu no resize
         window.addEventListener('resize', function() {
             if (window.innerWidth > 768 && navMenu) {
-                navMenu.style.display = '';
-                navMenu.style.flexDirection = '';
-                navMenu.style.position = '';
-                navMenu.style.top = '';
-                navMenu.style.left = '';
-                navMenu.style.right = '';
-                navMenu.style.background = '';
-                navMenu.style.padding = '';
-                navMenu.style.boxShadow = '';
+                navMenu.classList.remove('active');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.textContent = '☰';
+                }
             }
         });
-
         // Feedback visual ao adicionar ao carrinho
         const cartIcon = document.querySelector('.icon-btn[href="carrinho.php"]');
         if (cartIcon) {
