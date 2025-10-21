@@ -96,9 +96,7 @@ $sql_count = "SELECT COUNT(*) as total FROM produto p WHERE {$where_sql}";
 $stmt_count = mysqli_prepare($conn, $sql_count);
 if (!function_exists('mysqli_bind_params_refs')) {
     function mysqli_bind_params_refs($stmt, $types, $params) {
-        // Build array with stmt and types as the first two arguments, followed by params by reference
         $bindArgs = array_merge(array($stmt, $types), $params);
-        // call_user_func_array requires references for bind_param
         foreach ($bindArgs as $key => $value) {
             $bindArgs[$key] = &$bindArgs[$key];
         }
@@ -1133,6 +1131,37 @@ function buildUrl($params) {
         width: 18px;
     }
 }
+.product-image-placeholder {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.product-image-placeholder .icon {
+    font-size: 64px;
+    opacity: 0.3;
+    filter: grayscale(1);
+}
+
+.product-image-placeholder .text {
+    font-size: 12px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.product-image {
+    object-fit: contain;
+    padding: 10px;
+}
 
         
     </style>
@@ -1188,7 +1217,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <a class="icon-btn" href="login_cliente.php?redirect=home.php" title="Entrar">👤</a>
                 <?php endif; ?>
                 <?php if (isset($_SERVER['REMOTE_ADDR']) && ($_SERVER['REMOTE_ADDR'] === '127.0.0.1' || $_SERVER['REMOTE_ADDR'] === '::1')): ?>
-                <a class="icon-btn" href="login_adm.php" title="Admin">🔑</a>
+                <a class="icon-btn" href="login_adm.php" title="Admin">🔒</a>
                 <?php endif; ?>
                 <a class="icon-btn" href="carrinho.php" title="Carrinho">
                     🛒
@@ -1352,19 +1381,65 @@ document.addEventListener("DOMContentLoaded", () => {
                             $badge_class = '';
                         }
                         
+                        // Obter as fotos do banco
                         $foto1 = isset($p['foto1']) ? trim($p['foto1']) : '';
                         $foto2 = isset($p['foto2']) ? trim($p['foto2']) : '';
+                        
+                        // Escolher qual foto usar (prioriza foto1)
                         $img = $foto1 !== '' ? $foto1 : $foto2;
+                        
+                        // CORREÇÃO DO CAMINHO DAS IMAGENS
+                        // Caminho absoluto para verificar se existe no servidor
+                        $dir_atual = dirname(__FILE__); // Diretório do home.php
+                        $dir_raiz = dirname($dir_atual); // Volta um nível (raiz do projeto)
+                        $caminho_completo = $dir_raiz . DIRECTORY_SEPARATOR . 'produto' . DIRECTORY_SEPARATOR . 'fotos' . DIRECTORY_SEPARATOR . $img;
+                        
+                        // Caminho relativo para o HTML (URL)
+                        // Se home.php está em /loja/, precisa subir um nível: ../produto/fotos/
+                        $caminho_url = '../produto/fotos/' . htmlspecialchars($img);
+                        
+                        // Verificar se o arquivo existe
+                        $imagem_existe = ($img !== '' && file_exists($caminho_completo));
+                        
+                        // Definir ícone baseado na categoria
+                        $categoria_nome = strtolower($p['categoria_nome']);
+                        $icone_categoria = '🎮'; // Padrão
+                        
+                        $icones = array(
+                            'mouse' => '🖱️',
+                            'teclado' => '⌨️',
+                            'headset' => '🎧',
+                            'monitor' => '🖥️',
+                            'mousepad' => '🎯',
+                            'cadeira' => '💺',
+                            'microfone' => '🎤'
+                        );
+                        
+                        foreach ($icones as $cat => $icone) {
+                            if (strpos($categoria_nome, $cat) !== false) {
+                                $icone_categoria = $icone;
+                                break;
+                            }
+                        }
                         ?>
                         <div class="product-card">
                             <div class="product-image-wrapper">
-                                <?php if ($img !== ''): ?>
-                                    <img src="produto/fotos/<?php echo htmlspecialchars($img); ?>" 
+                                <?php if ($imagem_existe): ?>
+                                    <img src="<?php echo $caminho_url; ?>" 
                                          alt="<?php echo htmlspecialchars($p['nome']); ?>" 
                                          class="product-image"
-                                         onerror="this.parentElement.innerHTML='<div class=\'product-image\' style=\'display:flex;align-items:center;justify-content:center;font-size:48px;\'>🎮</div>'">
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <!-- Fallback caso a imagem falhe ao carregar -->
+                                    <div class="product-image-placeholder" style="display:none;">
+                                        <div class="icon"><?php echo $icone_categoria; ?></div>
+                                        <div class="text">Imagem indisponível</div>
+                                    </div>
                                 <?php else: ?>
-                                    <div class="product-image" style="display:flex;align-items:center;justify-content:center;font-size:48px;">🎮</div>
+                                    <!-- Placeholder quando não há imagem -->
+                                    <div class="product-image-placeholder">
+                                        <div class="icon"><?php echo $icone_categoria; ?></div>
+                                        <div class="text">Sem imagem</div>
+                                    </div>
                                 <?php endif; ?>
                                 <span class="product-badge <?php echo $badge_class; ?>"><?php echo $badge; ?></span>
                             </div>
@@ -1490,7 +1565,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('.btn-add-cart').forEach(btn => {
             if (!btn.disabled) {
                 btn.addEventListener('click', function(e) {
-                    // Se for um link, deixa o navegador seguir
                     if (this.tagName === 'A') {
                         return true;
                     }
@@ -1529,7 +1603,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 e.stopPropagation();
                 navMenu.classList.toggle('active');
                 
-                // Muda o ícone do botão
                 if (navMenu.classList.contains('active')) {
                     this.textContent = '✕';
                 } else {
@@ -1537,7 +1610,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            // Fechar menu ao clicar fora
             document.addEventListener('click', function(e) {
                 if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
                     navMenu.classList.remove('active');
@@ -1547,7 +1619,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
             
-            // Fechar menu ao clicar em um link
             navMenu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', function() {
                     navMenu.classList.remove('active');
@@ -1558,7 +1629,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // Ajustar menu no resize
         window.addEventListener('resize', function() {
             if (window.innerWidth > 768 && navMenu) {
                 navMenu.classList.remove('active');
@@ -1567,13 +1637,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         });
+
         // Feedback visual ao adicionar ao carrinho
         const cartIcon = document.querySelector('.icon-btn[href="carrinho.php"]');
         if (cartIcon) {
             const addButtons = document.querySelectorAll('.btn-add-cart[href*="carrinho.php"]');
             addButtons.forEach(btn => {
                 btn.addEventListener('click', function(e) {
-                    // Animação no ícone do carrinho
                     cartIcon.style.transform = 'scale(1.3)';
                     cartIcon.style.transition = 'transform 0.3s';
                     
