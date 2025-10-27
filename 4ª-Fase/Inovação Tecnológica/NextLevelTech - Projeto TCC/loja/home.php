@@ -482,7 +482,7 @@ function buildUrl($params) {
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: var(--text-secondary);
+            color: #000;
         }
 
         select {
@@ -494,6 +494,7 @@ function buildUrl($params) {
             cursor: pointer;
             min-width: 150px;
             transition: all 0.3s;
+            color: #000;
         }
 
         select:focus {
@@ -668,12 +669,15 @@ function buildUrl($params) {
             cursor: pointer;
             transition: all 0.3s;
             text-decoration: none;
-            color: inherit;
-            display: inline-block;
+            color: #000;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-quick-view:hover {
             border-color: var(--primary-color);
+            background: var(--bg-gray);
         }
 
         /* Pagination */
@@ -860,8 +864,6 @@ function buildUrl($params) {
             }
         }
         /* ===== CARROSSEL - BANNER PRINCIPAL ===== */
-/* ===== CARROSSEL - BANNER PRINCIPAL ===== */
-/* ===== CARROSSEL - BANNER PRINCIPAL ===== */
 .carousel-container {
     position: relative;
     width: 100%;
@@ -869,7 +871,7 @@ function buildUrl($params) {
     margin: 0 auto;
     overflow: hidden;
     background: #000;
-    height: 934px; /* Altura padrão 1920x934, será ajustada pelo JS */
+    height: 934px;
 }
 
 .carousel-slide {
@@ -962,24 +964,22 @@ function buildUrl($params) {
     border-radius: 8px;
 }
 
-/* Responsivo - Desktop extra grande (1920px+) */
+/* Responsivo */
 @media (min-width: 1920px) {
     .carousel-container {
         height: 934px;
     }
 }
 
-/* Responsivo - Desktop grande (1440px - 1919px) */
 @media (max-width: 1919px) and (min-width: 1440px) {
     .carousel-container {
-        height: 700px; /* 1440 / 2.056 ≈ 700px */
+        height: 700px;
     }
 }
 
-/* Responsivo - Desktop médio (1280px - 1439px) */
 @media (max-width: 1439px) and (min-width: 1280px) {
     .carousel-container {
-        height: 622px; /* 1280 / 2.056 ≈ 622px */
+        height: 622px;
     }
     
     .carousel-prev,
@@ -989,10 +989,9 @@ function buildUrl($params) {
     }
 }
 
-/* Responsivo - Desktop pequeno / Laptop (1024px - 1279px) */
 @media (max-width: 1279px) and (min-width: 1024px) {
     .carousel-container {
-        height: 465px; /* 1024 / 2.2 ≈ 465px */
+        height: 465px;
     }
     
     .carousel-prev,
@@ -1021,10 +1020,9 @@ function buildUrl($params) {
     }
 }
 
-/* Responsivo - Tablets (768px - 1023px) */
 @media (max-width: 1023px) and (min-width: 768px) {
     .carousel-container {
-        height: 410px; /* 1024 / 2.5 ≈ 410px */
+        height: 410px;
     }
     
     .carousel-prev,
@@ -1056,10 +1054,9 @@ function buildUrl($params) {
     }
 }
 
-/* Responsivo - Mobile grande (480px - 767px) */
 @media (max-width: 767px) and (min-width: 480px) {
     .carousel-container {
-        height: 360px; /* ~640 / 1.8 */
+        height: 360px;
     }
     
     .carousel-prev,
@@ -1094,10 +1091,9 @@ function buildUrl($params) {
     }
 }
 
-/* Responsivo - Mobile pequeno (até 479px) */
 @media (max-width: 479px) {
     .carousel-container {
-        height: 280px; /* ~375 / 1.8 */
+        height: 280px;
     }
     
     .carousel-prev,
@@ -1131,6 +1127,7 @@ function buildUrl($params) {
         width: 18px;
     }
 }
+
 .product-image-placeholder {
     background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
     position: absolute;
@@ -1162,8 +1159,6 @@ function buildUrl($params) {
     object-fit: contain;
     padding: 10px;
 }
-
-        
     </style>
 </head>
 <script>
@@ -1217,7 +1212,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <a class="icon-btn" href="login_cliente.php?redirect=home.php" title="Entrar">👤</a>
                 <?php endif; ?>
                 <?php if (isset($_SERVER['REMOTE_ADDR']) && ($_SERVER['REMOTE_ADDR'] === '127.0.0.1' || $_SERVER['REMOTE_ADDR'] === '::1')): ?>
-                <a class="icon-btn" href="login_adm.php" title="Admin">🔒</a>
+                <a class="icon-btn" href="login_adm.php" title="Admin">🔑</a>
                 <?php endif; ?>
                 <a class="icon-btn" href="carrinho.php" title="Carrinho">
                     🛒
@@ -1283,22 +1278,22 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="filters-content">
             <div class="filter-group">
                 <span class="filter-label">Ordenar:</span>
-                <select onchange="window.location.href='<?php echo buildUrl(array('ordem' => '')); ?>' + this.value + '<?php echo ($categoria_id > 0 ? '&categoria='.$categoria_id : '') . ($marca_id > 0 ? '&marca='.$marca_id : '') . ($pesquisa != '' ? '&pesquisa='.urlencode($pesquisa) : ''); ?>'">
-                    <option value="relevante" <?php echo $ordenacao == 'relevante' ? 'selected' : ''; ?>>Mais Relevantes</option>
-                    <option value="menor_preco" <?php echo $ordenacao == 'menor_preco' ? 'selected' : ''; ?>>Menor Preço</option>
-                    <option value="maior_preco" <?php echo $ordenacao == 'maior_preco' ? 'selected' : ''; ?>>Maior Preço</option>
-                    <option value="nome" <?php echo $ordenacao == 'nome' ? 'selected' : ''; ?>>Nome A-Z</option>
-                    <option value="lancamento" <?php echo $ordenacao == 'lancamento' ? 'selected' : ''; ?>>Lançamentos</option>
+                <select onchange="window.location.href=this.value">
+                    <option value="<?php echo buildUrl(array('ordem' => 'relevante', 'pagina' => '')); ?>" <?php echo $ordenacao == 'relevante' ? 'selected' : ''; ?>>Mais Relevantes</option>
+                    <option value="<?php echo buildUrl(array('ordem' => 'menor_preco', 'pagina' => '')); ?>" <?php echo $ordenacao == 'menor_preco' ? 'selected' : ''; ?>>Menor Preço</option>
+                    <option value="<?php echo buildUrl(array('ordem' => 'maior_preco', 'pagina' => '')); ?>" <?php echo $ordenacao == 'maior_preco' ? 'selected' : ''; ?>>Maior Preço</option>
+                    <option value="<?php echo buildUrl(array('ordem' => 'nome', 'pagina' => '')); ?>" <?php echo $ordenacao == 'nome' ? 'selected' : ''; ?>>Nome A-Z</option>
+                    <option value="<?php echo buildUrl(array('ordem' => 'lancamento', 'pagina' => '')); ?>" <?php echo $ordenacao == 'lancamento' ? 'selected' : ''; ?>>Lançamentos</option>
                 </select>
             </div>
             
             <?php if (!empty($marcas)): ?>
             <div class="filter-group">
                 <span class="filter-label">Marca:</span>
-                <select onchange="if(this.value=='0'){window.location.href='<?php echo buildUrl(array('marca' => '')); ?>'} else {window.location.href='<?php echo buildUrl(array('marca' => '')); ?>' + this.value}">
-                    <option value="0">Todas</option>
+                <select onchange="window.location.href=this.value">
+                    <option value="<?php echo buildUrl(array('marca' => '', 'pagina' => '')); ?>">Todas</option>
                     <?php foreach($marcas as $marca): ?>
-                        <option value="<?php echo $marca['codigo']; ?>" <?php echo $marca_id == $marca['codigo'] ? 'selected' : ''; ?>>
+                        <option value="<?php echo buildUrl(array('marca' => $marca['codigo'], 'pagina' => '')); ?>" <?php echo $marca_id == $marca['codigo'] ? 'selected' : ''; ?>>
                             <?php echo htmlspecialchars($marca['nome']); ?>
                         </option>
                     <?php endforeach; ?>
@@ -1308,10 +1303,10 @@ document.addEventListener("DOMContentLoaded", () => {
             
             <div class="filter-group">
                 <span class="filter-label">Categoria:</span>
-                <select onchange="if(this.value=='0'){window.location.href='<?php echo buildUrl(array('categoria' => '')); ?>'} else {window.location.href='<?php echo buildUrl(array('categoria' => '')); ?>' + this.value}">
-                    <option value="0">Todas</option>
+                <select onchange="window.location.href=this.value">
+                    <option value="<?php echo buildUrl(array('categoria' => '', 'pagina' => '')); ?>">Todas</option>
                     <?php foreach($categorias as $cat): ?>
-                        <option value="<?php echo $cat['codigo']; ?>" <?php echo $categoria_id == $cat['codigo'] ? 'selected' : ''; ?>>
+                        <option value="<?php echo buildUrl(array('categoria' => $cat['codigo'], 'pagina' => '')); ?>" <?php echo $categoria_id == $cat['codigo'] ? 'selected' : ''; ?>>
                             <?php echo htmlspecialchars($cat['nome']); ?>
                         </option>
                     <?php endforeach; ?>
@@ -1381,29 +1376,18 @@ document.addEventListener("DOMContentLoaded", () => {
                             $badge_class = '';
                         }
                         
-                        // Obter as fotos do banco
                         $foto1 = isset($p['foto1']) ? trim($p['foto1']) : '';
                         $foto2 = isset($p['foto2']) ? trim($p['foto2']) : '';
-                        
-                        // Escolher qual foto usar (prioriza foto1)
                         $img = $foto1 !== '' ? $foto1 : $foto2;
                         
-                        // CORREÇÃO DO CAMINHO DAS IMAGENS
-                        // Caminho absoluto para verificar se existe no servidor
-                        $dir_atual = dirname(__FILE__); // Diretório do home.php
-                        $dir_raiz = dirname($dir_atual); // Volta um nível (raiz do projeto)
+                        $dir_atual = dirname(__FILE__);
+                        $dir_raiz = dirname($dir_atual);
                         $caminho_completo = $dir_raiz . DIRECTORY_SEPARATOR . 'produto' . DIRECTORY_SEPARATOR . 'fotos' . DIRECTORY_SEPARATOR . $img;
-                        
-                        // Caminho relativo para o HTML (URL)
-                        // Se home.php está em /loja/, precisa subir um nível: ../produto/fotos/
                         $caminho_url = '../produto/fotos/' . htmlspecialchars($img);
-                        
-                        // Verificar se o arquivo existe
                         $imagem_existe = ($img !== '' && file_exists($caminho_completo));
                         
-                        // Definir ícone baseado na categoria
                         $categoria_nome = strtolower($p['categoria_nome']);
-                        $icone_categoria = '🎮'; // Padrão
+                        $icone_categoria = '🎮';
                         
                         $icones = array(
                             'mouse' => '🖱️',
@@ -1429,13 +1413,11 @@ document.addEventListener("DOMContentLoaded", () => {
                                          alt="<?php echo htmlspecialchars($p['nome']); ?>" 
                                          class="product-image"
                                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                    <!-- Fallback caso a imagem falhe ao carregar -->
                                     <div class="product-image-placeholder" style="display:none;">
                                         <div class="icon"><?php echo $icone_categoria; ?></div>
                                         <div class="text">Imagem indisponível</div>
                                     </div>
                                 <?php else: ?>
-                                    <!-- Placeholder quando não há imagem -->
                                     <div class="product-image-placeholder">
                                         <div class="icon"><?php echo $icone_categoria; ?></div>
                                         <div class="text">Sem imagem</div>
@@ -1550,7 +1532,6 @@ document.addEventListener("DOMContentLoaded", () => {
     </footer>
 
     <script>
-        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1561,7 +1542,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // Add to cart animation
         document.querySelectorAll('.btn-add-cart').forEach(btn => {
             if (!btn.disabled) {
                 btn.addEventListener('click', function(e) {
@@ -1583,7 +1563,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // Product card hover effect
         document.querySelectorAll('.product-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
                 this.style.borderColor = 'var(--accent-color)';
@@ -1594,7 +1573,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // Mobile menu toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navMenu = document.querySelector('.nav-menu');
 
@@ -1638,7 +1616,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // Feedback visual ao adicionar ao carrinho
         const cartIcon = document.querySelector('.icon-btn[href="carrinho.php"]');
         if (cartIcon) {
             const addButtons = document.querySelectorAll('.btn-add-cart[href*="carrinho.php"]');
@@ -1654,7 +1631,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // Lazy loading para imagens
         if ('IntersectionObserver' in window) {
             const imageObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -1677,7 +1653,6 @@ document.addEventListener("DOMContentLoaded", () => {
 </body>
 </html>
 <?php
-// Fechar conexão
 if ($conn) {
     mysqli_close($conn);
 }

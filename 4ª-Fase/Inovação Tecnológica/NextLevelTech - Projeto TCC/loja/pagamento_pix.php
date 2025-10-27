@@ -28,7 +28,6 @@ button { padding: 12px 24px; font-size: 16px; border: none; background: #111; co
 </style>
 </head>
 <body>
-<?php include 'header.php'; ?>
 
 <main>
   <h1>Pagamento via PIX</h1>
