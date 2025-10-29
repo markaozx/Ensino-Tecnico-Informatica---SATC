@@ -574,6 +574,36 @@ try {
 
         <?php if (isset($_SESSION['nivel']) && $_SESSION['nivel'] === 'super'): ?>
         <div class="menu-section">
+            <h2 class="section-title">💰 Painel Financeiro</h2>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <span class="card-icon">💰</span>
+                    <h3 class="card-title">Relatório de Vendas</h3>
+                    <p class="card-description">Visualize vendas, faturamento e estatísticas.</p>
+                    <a href="financeiro.php" class="btn">Acessar</a>
+                </div>
+                <div class="menu-card">
+                    <span class="card-icon">📊</span>
+                    <h3 class="card-title">Pedidos</h3>
+                    <p class="card-description">Gerencie todos os pedidos do sistema.</p>
+                    <a href="financeiro.php?tab=pedidos" class="btn btn-secondary">Ver Pedidos</a>
+                </div>
+                <div class="menu-card">
+                    <span class="card-icon">📈</span>
+                    <h3 class="card-title">Estatísticas</h3>
+                    <p class="card-description">Análise de vendas por período.</p>
+                    <a href="financeiro.php?tab=estatisticas" class="btn btn-secondary">Ver Estatísticas</a>
+                </div>
+                <div class="menu-card">
+                    <span class="card-icon">🥑</span>
+                    <h3 class="card-title">AbacatePay</h3>
+                    <p class="card-description">Transações e histórico de pagamentos.</p>
+                    <a href="financeiro.php?tab=transacoes" class="btn btn-secondary">Ver Transações</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-section">
             <h2 class="section-title">👤 Gerenciamento de Administradores</h2>
             <div class="menu-grid">
                 <div class="menu-card">

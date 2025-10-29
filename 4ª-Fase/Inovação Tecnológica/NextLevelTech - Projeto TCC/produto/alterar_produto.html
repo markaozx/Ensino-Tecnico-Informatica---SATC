@@ -3,340 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alterar Produto</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #fff;
-            padding: 20px;
-            overflow-x: hidden;
-        }
-
-        .cosmic-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
-            z-index: -1;
-            animation: cosmicFloat 20s ease-in-out infinite;
-        }
-
-        @keyframes cosmicFloat {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-20px) rotate(2deg); }
-            66% { transform: translateY(10px) rotate(-1deg); }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-menu {
-            margin-bottom: 2rem;
-        }
-
-        .nav-menu ul {
-            list-style: none;
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .nav-menu a {
-            color: #fff;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .nav-menu a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-            animation: slideIn 0.8s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        h1, h2 {
-            font-family: 'Orbitron', monospace;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            color: #fff;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 3s ease-in-out infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            color: #e0e0e0;
-        }
-
-        .form-grid {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .form-grid.columns {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #e0e0e0;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        input, select, textarea {
-            padding: 1rem;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            font-size: 1rem;
-            font-family: 'Montserrat', sans-serif;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            resize: vertical;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #4fc3f7;
-            box-shadow: 0 0 20px rgba(79, 195, 247, 0.3);
-            transform: translateY(-2px);
-        }
-
-        input::placeholder, textarea::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        textarea {
-            min-height: 100px;
-            max-height: 200px;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            color: white;
-            text-decoration: none;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Orbitron', monospace;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(45deg, #ff5252, #26a69a);
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .options-section {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
-            }
-            h1 {
-                font-size: 2rem;
-            }
-            .form-grid.columns {
-                grid-template-columns: 1fr;
-            }
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <title>Alterar Produto - NextLevel Tech</title>
     <script>
-        function formatPrice(input) {
-            input.value = input.value.replace(',', '.');
-        }
+        fetch('../admin/admin_form_styles.html')
+            .then(r => r.text())
+            .then(html => document.head.insertAdjacentHTML('beforeend', html));
     </script>
+    <style>
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .form-row { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
-    <div class="cosmic-bg"></div>
     <div class="container">
-        <nav class="nav-menu">
-            <ul>
-                <li><a href="cadastro_produto.html">Cadastrar Produto</a></li>
-                <li><a href="../Marca/cadastro_marca.html">Marcas</a></li>
-                <li><a href="../Categoria/cadastro_categoria.html">Categorias</a></li>
-                <li><a href="../Loja/menu.php">Menu</a></li>
-            </ul>
-        </nav>
-        <div class="card">
-            <h1>Alterar Produto</h1>
-            <form method="POST" action="alterar_produto.php" class="form-grid columns" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="codigo">Código do Produto:</label>
-                    <input type="number" id="codigo" name="codigo" min="1" required placeholder="Digite o código do produto">
-                </div>
-                <div class="form-group">
-                    <label for="nome">Nome do Produto:</label>
-                    <input type="text" id="nome" name="nome" placeholder="Deixe vazio para manter o atual" maxlength="150">
-                </div>
-                <div class="form-group">
-                    <label for="modelo">Modelo:</label>
-                    <input type="text" id="modelo" name="modelo" placeholder="Deixe vazio para manter o atual" maxlength="100">
-                </div>
-                <div class="form-group">
-                    <label for="cor">Cor:</label>
-                    <input type="text" id="cor" name="cor" placeholder="Deixe vazio para manter o atual" maxlength="30">
-                </div>
-                <div class="form-group">
-                    <label for="codmarca">Código da Marca:</label>
-                    <input type="number" id="codmarca" name="codmarca" placeholder="Deixe vazio para manter o atual" min="1">
-                </div>
-                <div class="form-group">
-                    <label for="codcategoria">Código da Categoria:</label>
-                    <input type="number" id="codcategoria" name="codcategoria" placeholder="Deixe vazio para manter o atual" min="1">
-                </div>
-                <div class="form-group">
-                    <label for="preco">Preço (R$):</label>
-                    <input type="number" id="preco" name="preco" step="0.01" min="0" oninput="formatPrice(this)" placeholder="Deixe vazio para manter o atual">
-                </div>
-                <div class="form-group">
-                    <label for="estoque">Estoque:</label>
-                    <input type="number" id="estoque" name="estoque" min="0" placeholder="Deixe vazio para manter o atual">
-                </div>
-                <div class="form-group">
-                    <label for="estoque_minimo">Estoque Mínimo:</label>
-                    <input type="number" id="estoque_minimo" name="estoque_minimo" min="0" placeholder="Deixe vazio para manter o atual">
-                </div>
-                <div class="form-group">
-                    <label for="ativo">Ativo:</label>
-                    <select id="ativo" name="ativo">
-                        <option value="">Manter atual</option>
-                        <option value="1">Sim</option>
-                        <option value="0">Não</option>
-                    </select>
-                </div>
-                <div class="form-group" style="grid-column: 1 / -1;">
-                    <label for="descricao">Descrição:</label>
-                    <textarea id="descricao" name="descricao" placeholder="Deixe vazio para manter a atual..."></textarea>
-                </div>
-                <div class="form-group" style="grid-column: 1 / -1;">
-                    <label for="especificacoes">Especificações:</label>
-                    <textarea id="especificacoes" name="especificacoes" placeholder="Deixe vazio para manter as atuais..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="foto1">Foto 1 (opcional):</label>
-                    <input type="file" id="foto1" name="foto1" accept="image/*">
-                </div>
-                <div class="form-group">
-                    <label for="foto2">Foto 2 (opcional):</label>
-                    <input type="file" id="foto2" name="foto2" accept="image/*">
-                </div>
-                <div class="form-group" style="grid-column: 1 / -1;">
-                    <button type="submit" name="alterar" class="btn">✏️ Alterar Produto</button>
-                </div>
-            </form>
-
-            <div class="options-section">
-                <h2>🔧 Outras Opções</h2>
-                <div class="menu-grid">
-                    <a href="cadastro_produto.html" class="btn">➕ Cadastrar Produto</a>
-                    <a href="excluir_produto.html" class="btn">🗑️ Excluir Produto</a>
-                    <a href="listar_produtos.php" class="btn">📦 Listar Produtos</a>
-                </div>
+        <div class="topbar">
+            <div>✏️ Alterar Produto</div>
+            <div>
+                <a href="listar_produtos.php">📋 Listar</a>
+                <a href="../loja/menu.php">🏠 Menu</a>
             </div>
         </div>
-    </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const inputs = document.querySelectorAll('input, textarea, select');
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.parentElement.style.transform = 'scale(1.02)';
-                });
-                input.addEventListener('blur', function() {
-                    this.parentElement.style.transform = 'scale(1)';
-                });
-            });
-        });
-    </script>
+        <div class="card">
+            <h1>✏️ Alterar Produto</h1>
+            <p class="subtitle">Modifique os dados de um produto existente (deixe vazio para não alterar)</p>
+
+            <form method="POST" action="alterar_produto.php" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="codigo">Código do Produto <span class="required">*</span></label>
+                    <input type="number" id="codigo" name="codigo" required 
+                           placeholder="Digite o código do produto">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nome">Novo Nome</label>
+                        <input type="text" id="nome" name="nome" 
+                               placeholder="Deixe vazio para não alterar" 
+                               maxlength="150">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="modelo">Novo Modelo</label>
+                        <input type="text" id="modelo" name="modelo" 
+                               placeholder="Deixe vazio para não alterar" 
+                               maxlength="100">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="preco">Novo Preço (R$)</label>
+                        <input type="number" id="preco" name="preco" 
+                               step="0.01" min="0" 
+                               placeholder="Deixe vazio para não alterar">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="estoque">Novo Estoque</label>
+                        <input type="number" id="estoque" name="estoque" 
+                               min="0" 
+                               placeholder="Deixe vazio para não alterar">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="descricao">Nova Descrição</label>
+                    <textarea id="descricao" name="descricao" 
+                              placeholder="Deixe vazio para não alterar"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="foto1">Nova Foto 1</label>
+                        <input type="file" id="foto1" name="foto1" accept="image/*">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="foto2">Nova Foto 2</label>
+                        <input type="file" id="foto2" name="foto2" accept="image/*">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" name="alterar" class="btn btn-success">✓ Salvar Alterações</button>
+                    <a href="listar_produtos.php" class="btn btn-secondary">← Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

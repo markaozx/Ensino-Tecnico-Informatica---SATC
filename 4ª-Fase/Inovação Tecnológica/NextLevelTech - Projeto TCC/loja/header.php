@@ -1,10 +1,15 @@
 <?php
+// Configurar timezone
+date_default_timezone_set('America/Sao_Paulo');
+
+// Iniciar sessão
 if (function_exists('session_status')) {
     if (session_status() === PHP_SESSION_NONE) { session_start(); }
 } else {
     if (session_id() === '') { session_start(); }
 }
 
+// Contar itens no carrinho
 $cart_count = 0;
 if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
     foreach ($_SESSION['cart'] as $item) {
@@ -16,7 +21,7 @@ $pesquisa_header = isset($_GET['pesquisa']) ? trim($_GET['pesquisa']) : '';
 ?>
 <div class="top-bar">
     Frete grátis para compras acima de R$ 299 | <a href="#">Aproveite!</a>
-    </div>
+</div>
 <header class="header">
     <div class="header-content">
         <a href="home.php" class="logo">NEXT<span>LEVEL</span></a>

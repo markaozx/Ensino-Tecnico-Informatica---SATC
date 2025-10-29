@@ -3,348 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excluir Categoria</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #fff;
-            padding: 20px;
-        }
-
-        .cosmic-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
-            z-index: -1;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-menu {
-            margin-bottom: 2rem;
-        }
-
-        .nav-menu ul {
-            list-style: none;
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .nav-menu a {
-            color: #fff;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .nav-menu a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-        }
-
-        h1, h2 {
-            font-family: 'Orbitron', monospace;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            color: #fff;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            color: #e0e0e0;
-        }
-
-        .warning-section {
-            background: rgba(255, 193, 7, 0.1);
-            border: 2px solid rgba(255, 193, 7, 0.3);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .warning-section h3 {
-            color: #ffc107;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            font-family: 'Orbitron', monospace;
-        }
-
-        .warning-text {
-            color: #fff3cd;
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-
-        .form-grid {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #e0e0e0;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        input, select {
-            padding: 1rem;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            font-size: 1rem;
-            font-family: 'Montserrat', sans-serif;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #4fc3f7;
-            box-shadow: 0 0 20px rgba(79, 195, 247, 0.3);
-            transform: translateY(-2px);
-        }
-
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            color: white;
-            text-decoration: none;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Orbitron', monospace;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-danger {
-            background: linear-gradient(45deg, #ff5722, #d32f2f);
-        }
-
-        .btn-danger:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(45deg, #e64a19, #c62828);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(45deg, #607d8b, #455a64);
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(45deg, #546e7a, #37474f);
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .options-section {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .confirmation-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin: 1rem 0;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .confirmation-checkbox input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: #ff5722;
-        }
-
-        .confirmation-checkbox label {
-            margin: 0;
-            text-transform: none;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 1rem;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <title>Excluir Categoria - NextLevel Tech</title>
+    <script>
+        fetch('../admin/admin_form_styles.html')
+            .then(r => r.text())
+            .then(html => document.head.insertAdjacentHTML('beforeend', html));
+    </script>
 </head>
 <body>
-    <div class="cosmic-bg"></div>
     <div class="container">
-        <nav class="nav-menu">
-            <ul>
-                <li><a href="../Produto/cadastro_produto.html">Produtos</a></li>
-                <li><a href="../Marca/cadastro_marca.html">Marcas</a></li>
-                <li><a href="../Admin/cadastro_admin.html">Administradores</a></li>
-                <li><a href="../Loja/menu.php">Menu</a></li>
-            </ul>
-        </nav>
-        <div class="card">
-            <h1>Excluir Categoria</h1>
-            
-            <div class="warning-section">
-                <h3>ATENÇÃO: Operação Irreversível</h3>
-                <div class="warning-text">
-                    Esta operação não pode ser desfeita. Uma vez excluída, todos os dados da categoria serão perdidos permanentemente.<br>
-                    <strong>Categorias que possuem produtos vinculados não podem ser excluídas.</strong><br>
-                    Certifique-se de remover todos os produtos da categoria antes de tentar excluí-la.
-                </div>
-            </div>
-            
-            <form method="POST" action="cadastro_categoria.php" class="form-grid" id="excluirForm">
-                <div class="form-group">
-                    <label for="codigo">Código da Categoria:</label>
-                    <input type="number" id="codigo" name="codigo" required placeholder="Digite o código da categoria que deseja excluir" min="1">
-                </div>
-                
-                <div class="confirmation-checkbox">
-                    <input type="checkbox" id="confirmacao" required>
-                    <label for="confirmacao">Confirmo que desejo excluir esta categoria permanentemente e entendo que esta ação é irreversível.</label>
-                </div>
-                
-                <div class="form-group">
-                    <button type="submit" name="excluir" class="btn btn-danger" id="excluirBtn" disabled>Excluir Categoria</button>
-                </div>
-            </form>
-
-            <div class="options-section">
-                <h2>Outras Opções</h2>
-                <div class="menu-grid">
-                    <a href="cadastro_categoria.html" class="btn btn-secondary">Cadastrar Categoria</a>
-                    <a href="alterar_categoria.html" class="btn btn-secondary">Alterar Categoria</a>
-                    <a href="listar_categorias.php" class="btn btn-secondary">Listar Categorias</a>
-                </div>
+        <div class="topbar">
+            <div>🗑️ Excluir Categoria</div>
+            <div>
+                <a href="listar_categorias.php">📋 Listar</a>
+                <a href="../loja/menu.php">🏠 Menu</a>
             </div>
         </div>
+
+        <div class="card">
+            <h1>🗑️ Excluir Categoria</h1>
+            <p class="subtitle">⚠️ Atenção: Esta ação não pode ser desfeita!</p>
+
+            <div class="message error">
+                <strong>AVISO:</strong> Ao excluir uma categoria, todos os produtos desta categoria ficarão sem categoria vinculada!
+            </div>
+
+            <form method="POST" action="excluir_categoria.php" onsubmit="return confirm('Tem certeza absoluta que deseja excluir esta categoria? Esta ação é IRREVERSÍVEL!')">
+                <div class="form-group">
+                    <label for="codigo">Código da Categoria a Excluir <span class="required">*</span></label>
+                    <input type="number" id="codigo" name="codigo" required 
+                           placeholder="Digite o código da categoria">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" name="excluir" class="btn btn-danger">🗑️ Confirmar Exclusão</button>
+                    <a href="listar_categorias.php" class="btn btn-secondary">← Cancelar</a>
+                </div>
+            </form>
+        </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('excluirForm');
-            const confirmacao = document.getElementById('confirmacao');
-            const excluirBtn = document.getElementById('excluirBtn');
-            const codigoInput = document.getElementById('codigo');
-
-            // Controlar estado do botão baseado na confirmação
-            confirmacao.addEventListener('change', function() {
-                excluirBtn.disabled = !this.checked;
-                if (this.checked) {
-                    excluirBtn.style.opacity = '1';
-                } else {
-                    excluirBtn.style.opacity = '0.5';
-                }
-            });
-
-            // Adicionar interatividade aos campos
-            const inputs = document.querySelectorAll('input[type="text"], input[type="number"]');
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.parentElement.style.transform = 'scale(1.02)';
-                });
-                
-                input.addEventListener('blur', function() {
-                    this.parentElement.style.transform = 'scale(1)';
-                });
-            });
-
-            // Validação do código
-            codigoInput.addEventListener('input', function() {
-                if (this.value < 1) {
-                    this.style.borderColor = '#ff5252';
-                } else {
-                    this.style.borderColor = '#4caf50';
-                }
-            });
-
-            // Confirmação adicional ao submeter
-            form.addEventListener('submit', function(e) {
-                const codigo = codigoInput.value;
-                const confirmar = confirm(`Tem certeza que deseja excluir a categoria com código ${codigo}?\n\nEsta ação NÃO PODE ser desfeita!`);
-                
-                if (!confirmar) {
-                    e.preventDefault();
-                }
-            });
-        });
-    </script>
 </body>
 </html>

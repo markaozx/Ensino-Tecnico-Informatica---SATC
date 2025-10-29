@@ -1,4 +1,7 @@
 <?php
+// Configurar timezone para Brasília
+date_default_timezone_set('America/Sao_Paulo');
+
 // Sessão (para cliente) - compatível com PHP 5.3
 if (function_exists('session_status')) {
     if (session_status() === PHP_SESSION_NONE) { session_start(); }

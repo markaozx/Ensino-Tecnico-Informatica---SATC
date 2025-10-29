@@ -1,4 +1,7 @@
 <?php
+// Configurar timezone para Brasília
+date_default_timezone_set('America/Sao_Paulo');
+
 // Sessão (para cliente) - compatível com PHP 5.3
 if (function_exists('session_status')) {
     if (session_status() === PHP_SESSION_NONE) { session_start(); }
@@ -321,11 +324,12 @@ foreach ($_SESSION['cart'] as $item) {
                     <p>Total de itens: <strong><?php echo $total_itens; ?></strong></p>
                     <div class="total">Total: R$ <?php echo number_format($total_valor, 2, ',', '.'); ?></div>
                     
-                    <div style="margin-top: 2rem;">
-                        <a href="?action=clear" class="btn btn-danger" onclick="return confirm('Esvaziar carrinho?')">Esvaziar Carrinho</a>
+                    <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 12px;">
                         <?php if (isset($_SESSION['cliente_id'])): ?>
-                            <a href="pagamento_pix.php" class="btn-pix">💰 Pagar com PIX</a>
-
+                            <a href="checkout_abacatepay.php" class="btn" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; text-decoration: none; display: inline-block; padding: 16px; border-radius: 12px; font-weight: 600; text-align: center; transition: all 0.3s;">
+                                🥑 Finalizar Compra com PIX
+                            </a>
+                            <a href="?action=clear" class="btn btn-danger" onclick="return confirm('Esvaziar carrinho?')" style="margin-top: 10px;">Esvaziar Carrinho</a>
                         <?php else: ?>
                             <a href="login_cliente.php?redirect=carrinho.php" class="btn btn-success">Fazer Login para Finalizar</a>
                         <?php endif; ?>
