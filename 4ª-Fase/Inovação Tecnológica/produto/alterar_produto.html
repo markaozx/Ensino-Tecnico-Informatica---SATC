@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Produto - NextLevel Tech</title>
+    <script>
+        fetch('../admin/admin_form_styles.html')
+            .then(r => r.text())
+            .then(html => document.head.insertAdjacentHTML('beforeend', html));
+    </script>
+    <style>
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .form-row { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div>✏️ Alterar Produto</div>
+            <div>
+                <a href="listar_produtos.php">📋 Listar</a>
+                <a href="../loja/menu.php">🏠 Menu</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h1>✏️ Alterar Produto</h1>
+            <p class="subtitle">Modifique os dados de um produto existente (deixe vazio para não alterar)</p>
+
+            <form method="POST" action="alterar_produto.php" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="codigo">Código do Produto <span class="required">*</span></label>
+                    <input type="number" id="codigo" name="codigo" required 
+                           placeholder="Digite o código do produto">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nome">Novo Nome</label>
+                        <input type="text" id="nome" name="nome" 
+                               placeholder="Deixe vazio para não alterar" 
+                               maxlength="150">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="modelo">Novo Modelo</label>
+                        <input type="text" id="modelo" name="modelo" 
+                               placeholder="Deixe vazio para não alterar" 
+                               maxlength="100">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="preco">Novo Preço (R$)</label>
+                        <input type="number" id="preco" name="preco" 
+                               step="0.01" min="0" 
+                               placeholder="Deixe vazio para não alterar">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="estoque">Novo Estoque</label>
+                        <input type="number" id="estoque" name="estoque" 
+                               min="0" 
+                               placeholder="Deixe vazio para não alterar">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="descricao">Nova Descrição</label>
+                    <textarea id="descricao" name="descricao" 
+                              placeholder="Deixe vazio para não alterar"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="foto1">Nova Foto 1</label>
+                        <input type="file" id="foto1" name="foto1" accept="image/*">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="foto2">Nova Foto 2</label>
+                        <input type="file" id="foto2" name="foto2" accept="image/*">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" name="alterar" class="btn btn-success">✓ Salvar Alterações</button>
+                    <a href="listar_produtos.php" class="btn btn-secondary">← Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

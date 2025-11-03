@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Marca - NextLevel Tech</title>
+    <script>
+        fetch('../admin/admin_form_styles.html')
+            .then(r => r.text())
+            .then(html => document.head.insertAdjacentHTML('beforeend', html));
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div>🏷️ Cadastro de Marca</div>
+            <div>
+                <a href="listar_marcas.php">📋 Listar</a>
+                <a href="../loja/menu.php">🏠 Menu</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h1>🏷️ Nova Marca</h1>
+            <p class="subtitle">Cadastre uma nova marca de produtos no sistema</p>
+
+            <form method="POST" action="cadastro_marca.php">
+                <div class="form-group">
+                    <label for="nome">Nome da Marca <span class="required">*</span></label>
+                    <input type="text" id="nome" name="nome" required 
+                           placeholder="Ex: Razer, Logitech, HyperX..." 
+                           maxlength="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="pais">País de Origem <span class="required">*</span></label>
+                    <input type="text" id="pais" name="pais" required 
+                           placeholder="Ex: Estados Unidos, China, Taiwan..." 
+                           maxlength="30">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" name="cadastrar" class="btn btn-success">✓ Cadastrar Marca</button>
+                    <a href="listar_marcas.php" class="btn btn-secondary">← Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

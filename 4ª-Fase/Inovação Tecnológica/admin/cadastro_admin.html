@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Administrador - NextLevel Tech</title>
+    <script>
+        fetch('admin_form_styles.html')
+            .then(r => r.text())
+            .then(html => document.head.insertAdjacentHTML('beforeend', html));
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div>👤 Cadastro de Administrador</div>
+            <div>
+                <a href="listar_admins.php">📋 Listar</a>
+                <a href="../loja/menu.php">🏠 Menu</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h1>👤 Novo Administrador</h1>
+            <p class="subtitle">Cadastre um novo administrador no sistema</p>
+
+            <div class="message error">
+                <strong>⚠️ IMPORTANTE:</strong> Apenas Super Admins (Nível 2) podem cadastrar novos administradores!
+            </div>
+
+            <form method="POST" action="cadastro_admin.php">
+                <div class="form-group">
+                    <label for="nome">Nome Completo <span class="required">*</span></label>
+                    <input type="text" id="nome" name="nome" required 
+                           placeholder="Digite o nome completo" 
+                           maxlength="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required 
+                           placeholder="email@exemplo.com" 
+                           maxlength="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha <span class="required">*</span></label>
+                    <input type="password" id="senha" name="senha" required 
+                           placeholder="Digite uma senha segura" 
+                           minlength="6">
+                </div>
+
+                <div class="form-group">
+                    <label for="nivel">Nível de Acesso <span class="required">*</span></label>
+                    <select id="nivel" name="nivel_acesso" required>
+                        <option value="">Selecione...</option>
+                        <option value="1">Nível 1 - Admin Padrão</option>
+                        <option value="2">Nível 2 - Super Admin (Acesso Total)</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" name="cadastrar" class="btn btn-success">✓ Cadastrar Administrador</button>
+                    <a href="listar_admins.php" class="btn btn-secondary">← Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
