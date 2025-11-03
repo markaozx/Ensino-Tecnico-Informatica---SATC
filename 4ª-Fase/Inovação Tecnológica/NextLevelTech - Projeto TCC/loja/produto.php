@@ -396,6 +396,8 @@ $dir_raiz = dirname($dir_atual);
             font-size: 16px;
             font-weight: 600;
             padding: 10px 0;
+            background: white;
+            color: var(--text-primary);
         }
 
         .action-buttons {
@@ -630,6 +632,7 @@ $dir_raiz = dirname($dir_atual);
             
             <div class="header-actions">
                 <?php if (isset($_SESSION['cliente_id'])): ?>
+                <a class="icon-btn" href="meus_pedidos.php" title="Meus Pedidos">📦</a>
                 <a class="icon-btn" href="logout_cliente.php?redirect=home.php" title="Sair">🚪</a>
                 <?php else: ?>
                 <a class="icon-btn" href="login_cliente.php?redirect=produto.php?id=<?php echo $produto_id; ?>" title="Entrar">👤</a>

@@ -1,11 +1,11 @@
 <?php
 // Conectar ao servidor e banco de dados
 $conectar = mysqli_connect('localhost', 'root', '', 'ecommerce_perifericos');
-
 if (!$conectar) {
     echo "Erro de conexão: " . mysqli_connect_error();
     exit;
 }
+mysqli_set_charset($conectar, "latin1");
 
 // Verificar se é uma requisição POST
 if ($_POST && isset($_POST['action']) && $_POST['action'] === 'delete') {

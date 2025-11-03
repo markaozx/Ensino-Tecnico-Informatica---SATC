@@ -11,6 +11,7 @@ $banco    = "ecommerce_perifericos";
 // Migrado para mysqli
 $conn = mysqli_connect($servidor, $usuario, $senha, $banco);
 if (!$conn) { die("Erro ao conectar: " . mysqli_connect_error()); }
+mysqli_set_charset($conn, "latin1");
 
 // ==== LOGIN ====
 $erro = "";
@@ -81,9 +82,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .login-box button { background: var(--accent-color); color: #fff; border: none; padding: 12px 16px; border-radius: 12px; cursor: pointer; width: 100%; font-size: 14px; font-weight: 600; transition: filter .2s; margin-top: 12px; }
         .login-box button:hover { filter: brightness(1.05); }
         .erro { background: #fdecea; color: #b71c1c; padding: 12px; border-radius: 10px; margin-bottom: 12px; border: 1px solid #f5c6c4; }
+        .back-home { position:fixed; top:16px; left:16px; z-index:1000; text-decoration:none; padding:8px 12px; border-radius:10px; background:#fff; color:#000; border:1px solid #e5e5e5; transition: all .2s; }
+        .back-home:hover { background: var(--bg-gray); border-color: var(--primary-color); }
     </style>
 </head>
 <body>
+    <a class="back-home" href="home.php">← Voltar</a>
     <div class="cosmic-bg"></div>
     <div class="floating-particles"></div>
     

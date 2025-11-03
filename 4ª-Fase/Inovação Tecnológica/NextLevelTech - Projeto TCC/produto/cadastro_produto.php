@@ -3,6 +3,7 @@ $conectar = mysqli_connect('localhost', 'root', '', 'ecommerce_perifericos');
 if (!$conectar) {
     die("Erro de conexão: " . mysqli_connect_error());
 }
+mysqli_set_charset($conectar, "latin1");
 
 function sanitize($conn, $field) {
     return mysqli_real_escape_string($conn, isset($_POST[$field]) ? $_POST[$field] : '');

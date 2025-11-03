@@ -93,7 +93,6 @@ $result_mais_vendidos = mysqli_query($conn, $sql_mais_vendidos);
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <link rel="stylesheet" href="theme.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Financeiro - NextLevel Tech</title>
@@ -191,6 +190,45 @@ $result_mais_vendidos = mysqli_query($conn, $sql_mais_vendidos);
             border-color: #667eea;
         }
 
+        .btn {
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-gray);
+            border-color: var(--text-primary);
+            box-shadow: none;
+        }
+
+        .btn-success {
+            background: var(--success-color);
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -254,11 +292,11 @@ $result_mais_vendidos = mysqli_query($conn, $sql_mais_vendidos);
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
         }
 
         table th {
             font-weight: 600;
-            color: var(--text-primary);
             font-size: 13px;
             text-transform: uppercase;
         }
@@ -306,6 +344,8 @@ $result_mais_vendidos = mysqli_query($conn, $sql_mais_vendidos);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             font-size: 14px;
+            background: white;
+            color: var(--text-primary);
         }
 
         .empty-state {

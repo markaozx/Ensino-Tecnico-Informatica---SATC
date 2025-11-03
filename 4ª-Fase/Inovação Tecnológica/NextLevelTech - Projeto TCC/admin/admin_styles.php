@@ -187,6 +187,8 @@
         font-size: 14px;
         width: 300px;
         max-width: 100%;
+        background: white;
+        color: var(--text-primary);
     }
 
     .search-bar button {

@@ -1,10 +1,10 @@
 <?php
 // Conectar ao servidor e banco de dados
 $conectar = mysqli_connect('localhost', 'root', '', 'ecommerce_perifericos');
-
 if (!$conectar) {
     die("Erro de conexão: " . mysqli_connect_error());
 }
+mysqli_set_charset($conectar, "latin1");
 
 // Processar cadastro de marca
 if (isset($_POST['cadastrar'])) {

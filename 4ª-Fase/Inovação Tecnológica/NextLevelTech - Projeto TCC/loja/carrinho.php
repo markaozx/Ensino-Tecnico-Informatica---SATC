@@ -243,7 +243,7 @@ foreach ($_SESSION['cart'] as $item) {
         .price { font-size: 16px; font-weight: 700; color: var(--primary-color); }
 
         .qty-controls { display: flex; align-items: center; gap: 8px; }
-        .qty-controls input[type=number] { width: 64px; padding: 8px; border: 1px solid var(--border-color); border-radius: 8px; text-align: center; }
+        .qty-controls input[type=number] { width: 64px; padding: 8px; border: 1px solid var(--border-color); border-radius: 8px; text-align: center; background: #fff; color: var(--text-primary); }
 
         .btn-small { padding: 6px 10px; font-size: 12px; border-radius: 8px; border: none; background: var(--accent-color); color: #fff; cursor: pointer; }
         .btn-small.secondary { background: #fff; color: var(--text-primary); border: 1px solid var(--border-color); }

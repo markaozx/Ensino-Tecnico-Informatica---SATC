@@ -4,10 +4,10 @@ if (!isset($_SESSION['adm_id'])) { header('Location: ../loja/login_adm.php'); ex
 if (!isset($_SESSION['nivel']) || $_SESSION['nivel'] !== 'super') { header('Location: ../loja/menu.php'); exit; }
 // Conectar ao servidor e banco de dados
 $conectar = mysqli_connect('localhost', 'root', '', 'ecommerce_perifericos');
-
 if (!$conectar) {
     die("Erro de conexão: " . mysqli_connect_error());
 }
+mysqli_set_charset($conectar, "latin1");
 
 // Processar cadastro de administrador
 if (isset($_POST['cadastrar'])) {

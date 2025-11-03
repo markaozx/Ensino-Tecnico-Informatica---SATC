@@ -1,10 +1,9 @@
 <?php
 $conectar = mysqli_connect('localhost', 'root', '', 'ecommerce_perifericos');
-mysqli_set_charset($conectar, 'utf8');
-
 if (!$conectar) {
     die("Erro de conexão: " . mysqli_connect_error());
 }
+mysqli_set_charset($conectar, 'utf8');
 
 if ($_POST && isset($_POST['action']) && $_POST['action'] === 'delete') {
     $codigo = intval($_POST['codigo']);

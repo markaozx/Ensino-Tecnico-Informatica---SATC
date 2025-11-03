@@ -281,16 +281,42 @@ function buildUrl($params) {
   color: #111;
 }
 
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 4px 8px;
+  transition: all 0.3s;
+}
+.header.scrolled .search-box,
+.header:hover .search-box {
+  background: rgba(0, 0, 0, 0.05);
+}
 .search-box input {
   border: none;
   border-radius: 20px;
   padding: 6px 10px;
   outline: none;
+  background: transparent;
+  color: white;
+  font-size: 14px;
+}
+.header.scrolled .search-box input,
+.header:hover .search-box input {
+  color: #111;
 }
 .search-box button {
   background: none;
   border: none;
   cursor: pointer;
+  color: white;
+  font-size: 16px;
+}
+.header.scrolled .search-box button,
+.header:hover .search-box button {
+  color: #111;
 }
 
 /* carrinho */
@@ -1210,6 +1236,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     </form>
                 </div>
                 <?php if (isset($_SESSION['cliente_id'])): ?>
+                <a class="icon-btn" href="meus_pedidos.php" title="Meus Pedidos">📦</a>
                 <a class="icon-btn" href="logout_cliente.php?redirect=home.php" title="Sair">🚪</a>
                 <?php else: ?>
                 <a class="icon-btn" href="login_cliente.php?redirect=home.php" title="Entrar">👤</a>

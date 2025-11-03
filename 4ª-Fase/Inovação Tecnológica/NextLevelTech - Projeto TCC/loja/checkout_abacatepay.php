@@ -37,6 +37,11 @@ $sql_cliente = "SELECT nome, email, telefone, cpf FROM usuario WHERE codigo = $c
 $result_cliente = mysqli_query($conn, $sql_cliente);
 $cliente = mysqli_fetch_assoc($result_cliente);
 
+// Verificar se encontrou o cliente
+if (!$cliente) {
+    die('Erro: Cliente não encontrado no banco de dados');
+}
+
 // Calcular total
 $total_valor = 0;
 $produtos = array();
@@ -47,7 +52,7 @@ foreach ($_SESSION['cart'] as $produto_id => $item) {
     
     $produtos[] = array(
         'externalId' => 'PROD_' . $produto_id,
-        'name' => $item['nome'],
+        'name' => sanitize_utf8($item['nome']),
         'quantity' => $item['qty'],
         'price' => (int)($item['preco'] * 100) // Converter para centavos
     );
@@ -86,10 +91,10 @@ $cobranca_data = array(
     'returnUrl' => SITE_URL . '/success_abacatepay.php?pedido_id=' . $pedido_id,
     'completionUrl' => SITE_URL . '/success_abacatepay.php?pedido_id=' . $pedido_id,
     'customer' => array(
-        'name' => $cliente['nome'],
-        'email' => $cliente['email'],
-        'cellphone' => $cliente['telefone'],
-        'taxId' => $cliente['cpf'],
+        'name' => sanitize_utf8($cliente['nome']),
+        'email' => sanitize_utf8($cliente['email']),
+        'cellphone' => sanitize_utf8($cliente['telefone']),
+        'taxId' => sanitize_utf8($cliente['cpf']),
         'metadata' => array(
             'pedido_id' => $pedido_id
         )

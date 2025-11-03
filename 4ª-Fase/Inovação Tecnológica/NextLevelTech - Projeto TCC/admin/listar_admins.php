@@ -48,8 +48,8 @@ mysqli_close($conn);
             <div>
                 <a href="../loja/menu.php">🏠 Menu Principal</a>
                 <a href="../loja/menu.php?acao=sair">🚪 Sair</a>
+                </div>
             </div>
-        </div>
 
         <div class="card">
             <h1>👥 Administradores do Sistema</h1>
@@ -65,39 +65,39 @@ mysqli_close($conn);
 
             <?php if ($total_admins > 0): ?>
                 <table>
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Nível de Acesso</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php 
-                        mysqli_data_seek($resultado, 0);
-                        while ($admin = mysqli_fetch_assoc($resultado)): 
-                        ?>
+                        <thead>
                             <tr>
+                                <th>Código</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Nível de Acesso</th>
+                            <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            mysqli_data_seek($resultado, 0);
+                            while ($admin = mysqli_fetch_assoc($resultado)): 
+                            ?>
+                                <tr>
                                 <td><strong>#<?php echo $admin['codigo']; ?></strong></td>
-                                <td><?php echo htmlspecialchars($admin['nome']); ?></td>
-                                <td><?php echo htmlspecialchars($admin['email']); ?></td>
-                                <td>
-                                    <?php if ($admin['nivel_acesso'] == 2): ?>
+                                    <td><?php echo htmlspecialchars($admin['nome']); ?></td>
+                                    <td><?php echo htmlspecialchars($admin['email']); ?></td>
+                                    <td>
+                                        <?php if ($admin['nivel_acesso'] == 2): ?>
                                         <span class="badge badge-success">🌟 Super Admin</span>
-                                    <?php else: ?>
+                                        <?php else: ?>
                                         <span class="badge badge-info">👤 Admin Padrão</span>
-                                    <?php endif; ?>
-                                </td>
+                                        <?php endif; ?>
+                                    </td>
                                 <td>
                                     <a href="alterar_admin.html?id=<?php echo $admin['codigo']; ?>" class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px; margin: 2px;">✏️</a>
                                     <a href="excluir_admin.html?id=<?php echo $admin['codigo']; ?>" class="btn btn-danger" style="padding: 6px 12px; font-size: 12px; margin: 2px;" onclick="return confirm('Tem certeza que deseja excluir este admin?')">🗑️</a>
                                 </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
             <?php else: ?>
                 <div class="empty-state">
                     <div class="empty-icon">👥</div>

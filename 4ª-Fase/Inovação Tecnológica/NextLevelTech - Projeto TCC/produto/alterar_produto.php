@@ -3,6 +3,7 @@ $conectar = mysqli_connect('localhost', 'root', '', 'ecommerce_perifericos');
 if (!$conectar) {
     die("Erro de conexão: " . mysqli_connect_error());
 }
+mysqli_set_charset($conectar, "latin1");
 
 // Verificar se é uma requisição AJAX para edição inline
 if ($_POST && isset($_POST['action']) && $_POST['action'] === 'update') {
