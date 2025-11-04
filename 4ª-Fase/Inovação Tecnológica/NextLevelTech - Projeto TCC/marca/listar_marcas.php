@@ -51,10 +51,15 @@ mysqli_close($conn);
         <div class="topbar">
             <div>👤 Logado como: <strong><?php echo htmlspecialchars($nomeAdm); ?></strong></div>
             <div>
-                <a href="../loja/menu.php">🏠 Menu Principal</a>
+                <a href="cadastro_marca.html">➕ Novo</a>
+                <a href="alterar_marca.html">✏️ Alterar</a>
+                <a href="excluir_marca.html">🗑️ Excluir</a>
+                <a href="../produto/listar_produtos.php">📦 Produtos</a>
+                <a href="../categoria/listar_categorias.php">📂 Categorias</a>
+                <a href="../loja/menu.php">🏠 Menu</a>
                 <a href="../loja/menu.php?acao=sair">🚪 Sair</a>
-                </div>
             </div>
+        </div>
 
         <div class="card">
             <h1>🏷️ Marcas de Produtos</h1>
@@ -87,9 +92,8 @@ mysqli_close($conn);
                                 <td><span class="editable" data-field="pais" data-type="text"><?php echo htmlspecialchars($marca['pais']); ?></span></td>
                                 <td><span class="badge badge-info"><?php echo $marca['total_produtos']; ?> produtos</span></td>
                                 <td>
-                                    <a href="alterar_marca.html?id=<?php echo $marca['codigo']; ?>" class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px; margin: 2px;">✏️</a>
-                                    <a href="excluir_marca.html?id=<?php echo $marca['codigo']; ?>" class="btn btn-danger" style="padding: 6px 12px; font-size: 12px; margin: 2px;" onclick="return confirm('Tem certeza? Esta marca tem <?php echo $marca['total_produtos']; ?> produto(s).')">🗑️</a>
-                                    </td>
+                                    <button onclick="excluirMarca(<?php echo $marca['codigo']; ?>, '<?php echo htmlspecialchars(addslashes($marca['nome'])); ?>', <?php echo $marca['total_produtos']; ?>)" class="btn btn-danger" style="padding: 6px 12px; font-size: 12px; margin: 2px;" title="Excluir Marca">🗑️</button>
+                                </td>
                                 </tr>
                             <?php endwhile; ?>
                         </tbody>
@@ -172,6 +176,88 @@ mysqli_close($conn);
                 });
             });
         });
+        
+        // Função para excluir marca
+        window.excluirMarca = function(codigo, nome, totalProdutos) {
+            let mensagem = `Tem certeza que deseja excluir a marca "${nome}"?`;
+            if (totalProdutos > 0) {
+                mensagem += `\n\n⚠️ ATENÇÃO: Esta marca possui ${totalProdutos} produto(s) vinculado(s).\n\nEsta ação não pode ser desfeita!`;
+            } else {
+                mensagem += '\n\nEsta ação não pode ser desfeita!';
+            }
+            
+            if (!confirm(mensagem)) {
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('action', 'delete');
+            formData.append('codigo', codigo);
+            
+            const row = document.querySelector(`tr[data-id="${codigo}"]`);
+            if (row) row.style.opacity = '0.5';
+            
+            fetch('excluir_marca.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                if (result.includes('sucesso') || result.includes('excluída')) {
+                    if (row) {
+                        row.style.transition = 'opacity 0.3s';
+                        row.style.opacity = '0';
+                        setTimeout(() => row.remove(), 300);
+                        showNotification('Marca excluída com sucesso!', 'success');
+                    }
+                } else {
+                    if (row) row.style.opacity = '1';
+                    alert('Erro ao excluir: ' + result);
+                }
+            })
+            .catch(error => {
+                if (row) row.style.opacity = '1';
+                alert('Erro ao excluir marca');
+            });
+        };
+        
+        // Função para mostrar notificações
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                background: ${type === 'success' ? 'rgba(76, 175, 80, 0.9)' : 'rgba(244, 67, 54, 0.9)'};
+                color: white;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // Adicionar animações CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(400px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(400px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
     });
     </script>
 </body>

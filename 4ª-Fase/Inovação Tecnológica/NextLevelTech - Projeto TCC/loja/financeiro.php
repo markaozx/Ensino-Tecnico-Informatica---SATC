@@ -659,7 +659,7 @@ $result_mais_vendidos = mysqli_query($conn, $sql_mais_vendidos);
             </div>
         <?php endif; ?>
     </div>
+<?php mysqli_close($conn); ?>
 </body>
 </html>
-<?php mysqli_close($conn); ?>
 

@@ -20,7 +20,7 @@ $conn = @mysqli_connect($servidor, $usuario, $senha, $banco);
 if (!$conn) {
     die("Erro de conexão: " . mysqli_connect_error());
 }
-mysqli_set_charset($conn, "utf8");
+mysqli_set_charset($conn, "latin1");
 
 // Parâmetros de busca e filtros
 $categoria_id = isset($_GET['categoria']) ? (int)$_GET['categoria'] : 0;

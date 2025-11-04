@@ -1,9 +1,10 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 $conectar = mysqli_connect('localhost', 'root', '', 'ecommerce_perifericos');
 if (!$conectar) {
     die("Erro de conexão: " . mysqli_connect_error());
 }
-mysqli_set_charset($conectar, 'utf8');
+mysqli_set_charset($conectar, 'latin1');
 
 if ($_POST && isset($_POST['action']) && $_POST['action'] === 'delete') {
     $codigo = intval($_POST['codigo']);
@@ -12,10 +13,10 @@ if ($_POST && isset($_POST['action']) && $_POST['action'] === 'delete') {
         $sql = "DELETE FROM produto WHERE codigo = $codigo";
         $resultado = mysqli_query($conectar, $sql);
         
-        if ($resultado) {
+        if ($resultado && mysqli_affected_rows($conectar) > 0) {
             echo "Produto excluído com sucesso!";
         } else {
-            echo "Erro ao excluir produto: " . mysqli_error($conectar);
+            echo "Erro ao excluir produto: " . ($resultado ? "Produto não encontrado." : mysqli_error($conectar));
         }
     } else {
         echo "Código de produto inválido!";
@@ -540,6 +541,6 @@ if (isset($_GET['codigo'])) {
             }, 5000);
         }
     </script>
+<?php mysqli_close($conectar); ?>
 </body>
 </html>
-<?php mysqli_close($conectar); ?>

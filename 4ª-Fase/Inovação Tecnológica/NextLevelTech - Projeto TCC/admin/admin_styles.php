@@ -32,30 +32,52 @@
     }
 
     .topbar {
-        background: rgba(0,0,0,0.8);
+        background: #28243D;
         color: white;
-        padding: 15px 30px;
+        padding: 15px 25px;
         border-radius: 12px;
         margin-bottom: 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 15px;
+        gap: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        font-weight: 500;
+    }
+
+    .topbar > div:first-child {
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .topbar > div:last-child {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
     }
 
     .topbar a {
         color: white;
         text-decoration: none;
-        padding: 8px 16px;
-        background: rgba(255,255,255,0.1);
+        padding: 10px 18px;
+        background: #3A3550;
         border-radius: 8px;
-        transition: all 0.3s;
+        transition: all 0.3s ease;
         font-size: 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 500;
+        border: none;
     }
 
     .topbar a:hover {
-        background: var(--accent-color);
+        background: #4A4558;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
 
     .card {

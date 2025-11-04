@@ -71,17 +71,134 @@ mysqli_close($conn);
             opacity: 0.6;
             pointer-events: none;
         }
+        /* Modal de edição rápida */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .modal-header h2 {
+            margin: 0;
+            color: var(--text-primary);
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        .modal-close:hover {
+            background: #f0f0f0;
+            color: var(--text-primary);
+        }
+        .modal-form .form-group {
+            margin-bottom: 1rem;
+        }
+        .modal-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        .modal-form input,
+        .modal-form select,
+        .modal-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+            background: white;
+            color: var(--text-primary);
+        }
+        .modal-form input:focus,
+        .modal-form select:focus,
+        .modal-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+        .modal-form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 2px solid #f0f0f0;
+        }
+        .modal-loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
     </style>
 </head>
 <body>
     <div class="container">
-            <div class="topbar">
+        <div class="topbar">
             <div>👤 Logado como: <strong><?php echo htmlspecialchars($nomeAdm); ?></strong></div>
-                <div>
-                <a href="../loja/menu.php">🏠 Menu Principal</a>
+            <div>
+                <a href="cadastro_produto.html">➕ Novo</a>
+                <a href="alterar_produto.html">✏️ Alterar</a>
+                <a href="excluir_produto.html">🗑️ Excluir</a>
+                <a href="../marca/listar_marcas.php">🏷️ Marcas</a>
+                <a href="../categoria/listar_categorias.php">📂 Categorias</a>
+                <a href="../loja/menu.php">🏠 Menu</a>
                 <a href="../loja/menu.php?acao=sair">🚪 Sair</a>
-                </div>
             </div>
+        </div>
 
         <div class="card">
             <h1>📦 Produtos Cadastrados</h1>
@@ -147,8 +264,8 @@ mysqli_close($conn);
                                         <?php endif; ?>
                                 </td>
                                 <td>
-                                    <a href="alterar_produto.html?id=<?php echo $produto['codigo']; ?>" class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px; margin: 2px;">✏️</a>
-                                    <a href="excluir_produto.html?id=<?php echo $produto['codigo']; ?>" class="btn btn-danger" style="padding: 6px 12px; font-size: 12px; margin: 2px;">🗑️</a>
+                                    <button onclick="editarProduto(<?php echo $produto['codigo']; ?>)" class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px; margin: 2px;" title="Editar Produto">✏️</button>
+                                    <button onclick="excluirProduto(<?php echo $produto['codigo']; ?>, '<?php echo htmlspecialchars(addslashes($produto['nome'])); ?>')" class="btn btn-danger" style="padding: 6px 12px; font-size: 12px; margin: 2px;" title="Excluir Produto">🗑️</button>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -169,6 +286,19 @@ mysqli_close($conn);
             <?php endif; ?>
                     </div>
                 </div>
+
+    <!-- Modal de Edição Rápida -->
+    <div id="editModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✏️ Editar Produto</h2>
+                <button class="modal-close" onclick="fecharModal()">✕</button>
+            </div>
+            <div id="modalBody">
+                <div class="modal-loading">Carregando...</div>
+            </div>
+        </div>
+    </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -267,6 +397,232 @@ mysqli_close($conn);
                 });
             });
         });
+        
+        // Função para excluir produto
+        window.excluirProduto = function(codigo, nome) {
+            if (!confirm(`Tem certeza que deseja excluir o produto "${nome}"?\n\nEsta ação não pode ser desfeita!`)) {
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('action', 'delete');
+            formData.append('codigo', codigo);
+            
+            const row = document.querySelector(`tr[data-id="${codigo}"]`);
+            if (row) row.style.opacity = '0.5';
+            
+            fetch('excluir_produto.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                if (result.includes('sucesso') || result.includes('excluído')) {
+                    if (row) {
+                        row.style.transition = 'opacity 0.3s';
+                        row.style.opacity = '0';
+                        setTimeout(() => row.remove(), 300);
+                        showNotification('Produto excluído com sucesso!', 'success');
+                    }
+                } else {
+                    if (row) row.style.opacity = '1';
+                    alert('Erro ao excluir: ' + result);
+                }
+            })
+            .catch(error => {
+                if (row) row.style.opacity = '1';
+                alert('Erro ao excluir produto');
+            });
+        };
+        
+        // Função para editar produto (abre modal)
+        window.editarProduto = function(codigo) {
+            const modal = document.getElementById('editModal');
+            const modalBody = document.getElementById('modalBody');
+            
+            modal.classList.add('active');
+            modalBody.innerHTML = '<div class="modal-loading">Carregando dados do produto...</div>';
+            
+            // Buscar dados do produto
+            fetch(`alterar_produto.php?codigo=${codigo}&ajax=1`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        modalBody.innerHTML = `<div class="modal-loading">${data.error}</div>`;
+                        return;
+                    }
+                    
+                    const produto = data.produto;
+                    const marcas = data.marcas;
+                    const categorias = data.categorias;
+                    
+                    // Função para escapar HTML
+                    function escapeHtml(text) {
+                        if (!text) return '';
+                        const div = document.createElement('div');
+                        div.textContent = text;
+                        return div.innerHTML;
+                    }
+                    
+                    // Criar formulário
+                    modalBody.innerHTML = `
+                        <form class="modal-form" id="editForm" onsubmit="salvarProduto(event, ${codigo})">
+                            <div class="form-group">
+                                <label>Nome *</label>
+                                <input type="text" name="nome" value="${escapeHtml(produto.nome)}" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Modelo *</label>
+                                    <input type="text" name="modelo" value="${escapeHtml(produto.modelo)}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Cor</label>
+                                    <input type="text" name="cor" value="${escapeHtml(produto.cor || '')}">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Marca *</label>
+                                    <select name="codmarca" required>
+                                        ${marcas.map(m => `<option value="${m.codigo}" ${m.codigo == produto.codmarca ? 'selected' : ''}>${escapeHtml(m.nome)}</option>`).join('')}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Categoria *</label>
+                                    <select name="codcategoria" required>
+                                        ${categorias.map(c => `<option value="${c.codigo}" ${c.codigo == produto.codcategoria ? 'selected' : ''}>${escapeHtml(c.nome)}</option>`).join('')}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Descrição</label>
+                                <textarea name="descricao" rows="3">${escapeHtml(produto.descricao || '')}</textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Preço *</label>
+                                    <input type="number" name="preco" step="0.01" value="${produto.preco}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Estoque *</label>
+                                    <input type="number" name="estoque" value="${produto.estoque}" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Estoque Mínimo</label>
+                                    <input type="number" name="estoque_minimo" value="${produto.estoque_minimo || 0}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Status *</label>
+                                    <select name="ativo" required>
+                                        <option value="1" ${produto.ativo == 1 ? 'selected' : ''}>Ativo</option>
+                                        <option value="0" ${produto.ativo == 0 ? 'selected' : ''}>Inativo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-actions">
+                                <button type="button" class="btn btn-secondary" onclick="fecharModal()">Cancelar</button>
+                                <button type="submit" class="btn">💾 Salvar Alterações</button>
+                            </div>
+                        </form>
+                    `;
+                })
+                .catch(error => {
+                    modalBody.innerHTML = `<div class="modal-loading">Erro ao carregar dados: ${error.message}</div>`;
+                });
+        };
+        
+        // Função para fechar modal
+        window.fecharModal = function() {
+            document.getElementById('editModal').classList.remove('active');
+        };
+        
+        // Fechar modal ao clicar fora
+        document.getElementById('editModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                fecharModal();
+            }
+        });
+        
+        // Função para salvar produto
+        window.salvarProduto = function(event, codigo) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            formData.append('action', 'update');
+            formData.append('codigo', codigo);
+            
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Salvando...';
+            
+            fetch('alterar_produto.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                if (result.includes('sucesso') || result.includes('atualizado')) {
+                    showNotification('Produto atualizado com sucesso!', 'success');
+                    fecharModal();
+                    // Recarregar a página após 1 segundo
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    alert('Erro ao atualizar: ' + result);
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                }
+            })
+            .catch(error => {
+                alert('Erro ao salvar produto');
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            });
+        };
+        
+        // Função para mostrar notificações
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                background: ${type === 'success' ? 'rgba(76, 175, 80, 0.9)' : 'rgba(244, 67, 54, 0.9)'};
+                color: white;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // Adicionar animações CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(400px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(400px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
     });
     </script>
 </body>

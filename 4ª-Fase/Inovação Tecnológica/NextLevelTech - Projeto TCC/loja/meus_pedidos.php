@@ -254,6 +254,6 @@ $result_pedidos = mysqli_query($conn, $sql_pedidos);
             <?php endif; ?>
         </div>
     </div>
+<?php mysqli_close($conn); ?>
 </body>
 </html>
-<?php mysqli_close($conn); ?>

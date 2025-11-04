@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 $conectar = mysqli_connect('localhost', 'root', '', 'ecommerce_perifericos');
 if (!$conectar) {
     die("Erro de conexão: " . mysqli_connect_error());
@@ -10,7 +11,7 @@ function sanitize($conn, $field) {
 }
 
 // Gravar (cadastrar)
-if (isset($_POST['gravar'])) {
+if (isset($_POST['cadastrar'])) {
     $nome = sanitize($conectar, 'nome');
     $modelo = sanitize($conectar, 'modelo');
     $cor = sanitize($conectar, 'cor');
@@ -21,7 +22,7 @@ if (isset($_POST['gravar'])) {
     $preco = floatval(str_replace(',', '.', $_POST['preco']));
     $estoque = intval($_POST['estoque']);
     $estoque_minimo = intval($_POST['estoque_minimo']);
-    $ativo = intval($_POST['ativo']);
+    $ativo = isset($_POST['ativo']) ? intval($_POST['ativo']) : 1; // Padrão: ativo (1)
     $data_cadastro = date('Y-m-d H:i:s');
 
     // Upload de fotos (salva nomes gerados)
@@ -84,17 +85,26 @@ if (isset($_POST['excluir'])) {
 // Alterar
 if (isset($_POST['alterar'])) {
     $codigo = intval($_POST['codigo']);
-    $nome = sanitize($conectar, 'nome');
-    $modelo = sanitize($conectar, 'modelo');
-    $cor = sanitize($conectar, 'cor');
-    $codmarca = intval($_POST['codmarca']);
-    $codcategoria = intval($_POST['codcategoria']);
-    $descricao = sanitize($conectar, 'descricao');
-    $especificacoes = sanitize($conectar, 'especificacoes');
-    $preco = floatval(str_replace(',', '.', $_POST['preco']));
-    $estoque = intval($_POST['estoque']);
-    $estoque_minimo = intval($_POST['estoque_minimo']);
-    $ativo = intval($_POST['ativo']);
+    
+    // Buscar dados atuais do produto
+    $sql_atual = "SELECT * FROM produto WHERE codigo = $codigo";
+    $resultado_atual = mysqli_query($conectar, $sql_atual);
+    
+    if ($resultado_atual && mysqli_num_rows($resultado_atual) > 0) {
+        $produto_atual = mysqli_fetch_assoc($resultado_atual);
+        
+        // Se o campo estiver vazio, usa o valor atual do banco
+        $nome = !empty($_POST['nome']) ? sanitize($conectar, 'nome') : $produto_atual['nome'];
+        $modelo = !empty($_POST['modelo']) ? sanitize($conectar, 'modelo') : $produto_atual['modelo'];
+        $cor = !empty($_POST['cor']) ? sanitize($conectar, 'cor') : $produto_atual['cor'];
+        $codmarca = !empty($_POST['codmarca']) ? intval($_POST['codmarca']) : $produto_atual['codmarca'];
+        $codcategoria = !empty($_POST['codcategoria']) ? intval($_POST['codcategoria']) : $produto_atual['codcategoria'];
+        $descricao = !empty($_POST['descricao']) ? sanitize($conectar, 'descricao') : $produto_atual['descricao'];
+        $especificacoes = !empty($_POST['especificacoes']) ? sanitize($conectar, 'especificacoes') : $produto_atual['especificacoes'];
+        $preco = !empty($_POST['preco']) ? floatval(str_replace(',', '.', $_POST['preco'])) : $produto_atual['preco'];
+        $estoque = isset($_POST['estoque']) && $_POST['estoque'] !== '' ? intval($_POST['estoque']) : $produto_atual['estoque'];
+        $estoque_minimo = isset($_POST['estoque_minimo']) && $_POST['estoque_minimo'] !== '' ? intval($_POST['estoque_minimo']) : $produto_atual['estoque_minimo'];
+        $ativo = isset($_POST['ativo']) && $_POST['ativo'] !== '' ? intval($_POST['ativo']) : $produto_atual['ativo'];
     // Upload opcional ao alterar
     $diretorio = __DIR__ . DIRECTORY_SEPARATOR . 'fotos' . DIRECTORY_SEPARATOR;
     if (!is_dir($diretorio)) { @mkdir($diretorio, 0777, true); }
@@ -125,7 +135,7 @@ if (isset($_POST['alterar'])) {
                 $mensagem = "Produto alterado com sucesso!";
                 $tipo_mensagem = "success";
             } else {
-                $mensagem = "Nenhuma alteração realizada ou produto não encontrado.";
+                $mensagem = "Nenhuma alteração realizada (dados idênticos aos atuais).";
                 $tipo_mensagem = "warning";
             }
         } else {
@@ -133,6 +143,10 @@ if (isset($_POST['alterar'])) {
             $tipo_mensagem = "error";
         }
     }
+} else {
+    $mensagem = "Produto não encontrado com o código informado.";
+    $tipo_mensagem = "error";
+}
 }
 
 mysqli_close($conectar);
@@ -143,24 +157,78 @@ mysqli_close($conectar);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultado - Produto</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <?php include '../admin/admin_styles.php'; ?>
     <style>
-        body { font-family: 'Montserrat', sans-serif; background: #1a1a2e; color: #fff; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
-        .card { background: rgba(255,255,255,0.08); padding: 2rem; border-radius: 16px; width: min(90%, 700px); text-align: center; border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(6px); }
-        .title { font-family: 'Orbitron', monospace; font-size: 1.6rem; margin-bottom: 1rem; }
-        .msg { margin: 1rem 0; font-size: 1rem; }
-        .btn { display: inline-block; margin: .5rem; padding: .75rem 1.25rem; border-radius: 10px; background: linear-gradient(45deg, #ff6b6b, #4ecdc4); color: #fff; text-decoration: none; font-weight: 600; }
-        .btn:hover { filter: brightness(1.05); }
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            font-size: 1.1rem;
+        }
+        .alert-success {
+            color: #fff;
+            background-color: rgba(76, 175, 80, 0.8);
+            border-color: rgba(76, 175, 80, 0.5);
+        }
+        .alert-error {
+            color: #fff;
+            background-color: rgba(244, 67, 54, 0.8);
+            border-color: rgba(244, 67, 54, 0.5);
+        }
+        .alert-warning {
+            color: #fff;
+            background-color: rgba(255, 152, 0, 0.8);
+            border-color: rgba(255, 152, 0, 0.5);
+        }
+        .menu-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 1rem; 
+            margin-top: 1.5rem; 
+        }
+        h2 { 
+            font-size: 1.3rem; 
+            margin-top: 2rem; 
+            margin-bottom: 1rem; 
+        }
     </style>
-    <meta http-equiv="refresh" content="3; URL=cadastro_produto.html" />
 </head>
 <body>
-    <div class="card">
-        <div class="title">Cadastro de Produto</div>
-        <div class="msg"><?php echo isset($mensagem) ? $mensagem : 'Sem ação realizada.'; ?></div>
-        <div>
-            <a class="btn" href="cadastro_produto.html">Voltar ao cadastro</a>
-            <a class="btn" href="listar_produtos.php">Listar produtos</a>
+    <div class="container">
+        <div class="topbar">
+            <div>📦 Cadastro de Produto</div>
+            <div>
+                <a href="cadastro_produto.html">➕ Novo</a>
+                <a href="listar_produtos.php">📋 Listar</a>
+                <a href="alterar_produto.html">✏️ Alterar</a>
+                <a href="excluir_produto.html">🗑️ Excluir</a>
+                <a href="../loja/menu.php">🏠 Menu</a>
+            </div>
+        </div>
+        <div class="card">
+            <?php if (isset($mensagem)): ?>
+                <div class="alert alert-<?php echo $tipo_mensagem; ?>">
+                    <?php echo htmlspecialchars($mensagem); ?>
+                </div>
+            <?php endif; ?>
+            
+            <h1>Navegação Rápida</h1>
+            <div class="menu-grid">
+                <a class="btn" href="cadastro_produto.html">🔄 Cadastrar Novo Produto</a>
+                <a class="btn" href="listar_produtos.php">📋 Listar Produtos</a>
+                <a class="btn" href="alterar_produto.html">✏️ Alterar Produto</a>
+                <a class="btn" href="excluir_produto.html">🗑️ Excluir Produto</a>
+            </div>
+            
+            <h2>Outras Áreas</h2>
+            <div class="menu-grid">
+                <a class="btn" href="../marca/cadastro_marca.html">🏷️ Marcas</a>
+                <a class="btn" href="../categoria/cadastro_categoria.html">📂 Categorias</a>
+                <a class="btn" href="../admin/cadastro_admin.html">👤 Administradores</a>
+                <a class="btn" href="../loja/menu.php">🏠 Menu Principal</a>
+            </div>
         </div>
     </div>
 </body>

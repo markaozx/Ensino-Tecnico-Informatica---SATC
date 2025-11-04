@@ -1,5 +1,5 @@
 <?php
-// Configurar charset para UTF-8
+date_default_timezone_set('America/Sao_Paulo');
 
 // Conectar ao servidor e banco de dados
 $conectar = mysqli_connect('localhost', 'root', '', 'ecommerce_perifericos');
@@ -7,7 +7,7 @@ if (!$conectar) {
     echo "Erro de conexão: " . mysqli_connect_error();
     exit;
 }
-mysqli_set_charset($conectar, 'utf8');
+mysqli_set_charset($conectar, 'latin1');
 
 // Verificar se é uma requisição POST
 if ($_POST && isset($_POST['action']) && $_POST['action'] === 'update') {

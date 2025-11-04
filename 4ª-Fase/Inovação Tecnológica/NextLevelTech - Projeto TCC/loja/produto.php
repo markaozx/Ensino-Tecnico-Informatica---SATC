@@ -17,7 +17,7 @@ $conn = @mysqli_connect($servidor, $usuario, $senha, $banco);
 if (!$conn) {
     die("Erro de conexão: " . mysqli_connect_error());
 }
-mysqli_set_charset($conn, "utf8");
+mysqli_set_charset($conn, "latin1");
 
 // Pegar ID do produto
 $produto_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;

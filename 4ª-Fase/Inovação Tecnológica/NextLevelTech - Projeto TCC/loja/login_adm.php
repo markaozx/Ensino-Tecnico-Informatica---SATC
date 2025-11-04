@@ -1,14 +1,14 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 session_start();
 
 // ==== CONFIGURAÇÃO BANCO DE DADOS ====
 $servidor = "localhost";
-$usuario  = "root";     // ajuste conforme seu MySQL
-$senha    = "";         // ajuste conforme seu MySQL
+$usuario  = "root";
+$senha    = "";
 $banco    = "ecommerce_perifericos";
 
 // ==== CONEXÃO ====
-// Migrado para mysqli
 $conn = mysqli_connect($servidor, $usuario, $senha, $banco);
 if (!$conn) { die("Erro ao conectar: " . mysqli_connect_error()); }
 mysqli_set_charset($conn, "latin1");

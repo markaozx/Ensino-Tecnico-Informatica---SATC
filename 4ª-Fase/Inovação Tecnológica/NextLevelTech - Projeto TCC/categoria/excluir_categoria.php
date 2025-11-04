@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 // Conectar ao servidor e banco de dados
 $conectar = mysqli_connect('localhost', 'root', '', 'ecommerce_perifericos');
 if (!$conectar) {

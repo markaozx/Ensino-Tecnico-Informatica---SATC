@@ -1,9 +1,53 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 $conectar = mysqli_connect('localhost', 'root', '', 'ecommerce_perifericos');
 if (!$conectar) {
     die("Erro de conexão: " . mysqli_connect_error());
 }
 mysqli_set_charset($conectar, "latin1");
+
+// Retornar dados do produto em JSON para requisições AJAX
+if (isset($_GET['codigo']) && isset($_GET['ajax'])) {
+    $codigo = intval($_GET['codigo']);
+    $sql = "SELECT p.*, m.nome AS marca_nome, c.nome AS categoria_nome 
+            FROM produto p 
+            LEFT JOIN marca m ON p.codmarca = m.codigo 
+            LEFT JOIN categoria c ON p.codcategoria = c.codigo 
+            WHERE p.codigo = $codigo";
+    $resultado = mysqli_query($conectar, $sql);
+    
+    if ($resultado && mysqli_num_rows($resultado) > 0) {
+        $produto = mysqli_fetch_assoc($resultado);
+        
+        // Buscar marcas e categorias para os selects
+        $marcas = [];
+        $categorias = [];
+        
+        $sql_marcas = "SELECT codigo, nome FROM marca ORDER BY nome";
+        $result_marcas = mysqli_query($conectar, $sql_marcas);
+        while ($marca = mysqli_fetch_assoc($result_marcas)) {
+            $marcas[] = $marca;
+        }
+        
+        $sql_categorias = "SELECT codigo, nome FROM categoria ORDER BY nome";
+        $result_categorias = mysqli_query($conectar, $sql_categorias);
+        while ($categoria = mysqli_fetch_assoc($result_categorias)) {
+            $categorias[] = $categoria;
+        }
+        
+        header('Content-Type: application/json');
+        echo json_encode([
+            'produto' => $produto,
+            'marcas' => $marcas,
+            'categorias' => $categorias
+        ]);
+        exit;
+    } else {
+        header('Content-Type: application/json');
+        echo json_encode(['error' => 'Produto não encontrado']);
+        exit;
+    }
+}
 
 // Verificar se é uma requisição AJAX para edição inline
 if ($_POST && isset($_POST['action']) && $_POST['action'] === 'update') {

@@ -351,7 +351,6 @@ foreach ($_SESSION['cart'] as $item) {
             });
         }, 5000);
     </script>
-
 <?php mysqli_close($conn); ?>
 </body>
 </html>
